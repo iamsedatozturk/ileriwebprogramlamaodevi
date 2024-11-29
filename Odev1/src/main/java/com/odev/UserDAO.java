@@ -19,7 +19,7 @@ public class UserDAO {
                 user.setId(resultSet.getString("Id"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setName(resultSet.getString("Name"));
-                user.setGender(resultSet.getInt("Gender"));
+                user.setGender(resultSet.getString("Gender"));
                 user.setCity(resultSet.getString("City"));
                 user.setPassword(resultSet.getString("Password"));
                 user.setRole(resultSet.getString("Role"));

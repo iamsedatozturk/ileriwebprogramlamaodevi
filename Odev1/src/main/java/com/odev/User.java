@@ -4,7 +4,7 @@ public class User {
     private String id;
     private String email;
     private String name;
-    private int gender;
+    private String gender;
     private String city;
     private String password;
     private String role;
@@ -37,11 +37,11 @@ public class User {
     }
 
     // gender
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
