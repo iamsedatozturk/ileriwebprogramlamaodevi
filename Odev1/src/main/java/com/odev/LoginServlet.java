@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 			mySession.setAttribute("user", user);
 			mySession.setAttribute("loginTime", new java.util.Date());
 
-			response.sendRedirect("Users.jsp");
+			response.sendRedirect("MainPage.jsp");
 		} else {
 			response.sendRedirect("Login_Error.html");
 		}

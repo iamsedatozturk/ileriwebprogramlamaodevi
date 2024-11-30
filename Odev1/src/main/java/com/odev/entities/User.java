@@ -4,10 +4,19 @@ public class User {
     private String id;
     private String email;
     private String name;
-    private String gender;
+    private String hobies;
     private String city;
     private String password;
+    private String linkName;
+    private String address;
+    private String phone;
+    private String schoolName;
+    private String business;
+    private String webSite;
+    private String facebookName;
+    private String twitterName;
     private String role;
+    private String gender;
 
     // id
     public String getId() {
@@ -36,13 +45,13 @@ public class User {
         this.name = name;
     }
 
-    // gender
-    public String getGender() {
-        return gender;
+    // hobies
+    public String getHobies() {
+        return hobies;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setHobies(String hobies) {
+        this.hobies = hobies;
     }
 
     // city
@@ -53,7 +62,7 @@ public class User {
     public void setCity(String city) {
         this.city = city;
     }
-
+    
     // password
     public String getPassword() {
         return password;
@@ -63,6 +72,78 @@ public class User {
         this.password = password;
     }
 
+    // linkName
+    public String getLinkName() {
+        return linkName;
+    }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+    
+    // address
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+    	this.address = address;
+    }
+    
+    // phone
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+    	this.phone = phone;
+    }
+    
+    // webSite
+    public String getWebSite() {
+        return webSite;
+    }
+
+    public void setWebSite(String webSite) {
+    	this.webSite = webSite;
+    }
+    
+    // facebookName
+    public String getFacebookName() {
+        return facebookName;
+    }
+
+    public void setFacebookName(String facebookName) {
+      	this.facebookName = facebookName;
+    }    
+
+    // twitterName
+    public String getTwitterName() {
+        return twitterName;
+    }
+
+    public void setTwitterName(String twitterName) {
+      	this.twitterName = twitterName;
+    }  
+    
+    // schoolName
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+      	this.schoolName = schoolName;
+    }  
+    
+    // business
+    public String getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(String business) {
+      	this.business = business;
+    } 
+    
     // role
     public String getRole() {
         return role;
@@ -70,5 +151,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+    
+ // gender
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

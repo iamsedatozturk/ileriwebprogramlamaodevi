@@ -23,13 +23,23 @@ public class UserAppService {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					user = new User();
-					user.setId(resultSet.getString("Id"));
-					user.setEmail(resultSet.getString("Email"));
-					user.setName(resultSet.getString("Name"));
-					user.setGender(resultSet.getString("Gender"));
-					user.setCity(resultSet.getString("City"));
-					user.setPassword(resultSet.getString("Password"));
-					user.setRole(resultSet.getString("Role"));
+					
+					user.setId(resultSet.getString("Id") == null ? "" : resultSet.getString("Id"));
+					user.setEmail(resultSet.getString("Email") == null ? "" : resultSet.getString("Email"));
+					user.setName(resultSet.getString("Name") == null ? "" : resultSet.getString("Name"));
+					user.setHobies(resultSet.getString("Hobies") == null ? "" : resultSet.getString("Hobies"));
+					user.setCity(resultSet.getString("City") == null ? "" : resultSet.getString("City"));
+					user.setPassword(resultSet.getString("Password") == null ? "" : resultSet.getString("Password"));
+					user.setLinkName(resultSet.getString("LinkName") == null ? "" : resultSet.getString("LinkName"));
+					user.setAddress(resultSet.getString("Address") == null ? "" : resultSet.getString("Address"));
+					user.setPhone(resultSet.getString("Phone") == null ? "" : resultSet.getString("Phone"));
+					user.setSchoolName(resultSet.getString("SchoolName") == null ? "" : resultSet.getString("SchoolName"));
+					user.setBusiness(resultSet.getString("Business") == null ? "" : resultSet.getString("Business"));
+					user.setWebSite(resultSet.getString("WebSite") == null ? "" : resultSet.getString("WebSite"));
+					user.setFacebookName(resultSet.getString("FacebookName") == null ? "" : resultSet.getString("FacebookName"));
+					user.setTwitterName(resultSet.getString("TwitterName") == null ? "" : resultSet.getString("TwitterName"));
+					user.setGender(resultSet.getString("Gender") == null ? "" : resultSet.getString("Gender"));
+					user.setRole(resultSet.getString("Role") == null ? "" : resultSet.getString("Role"));
 				}
 			}
 		}
@@ -48,13 +58,22 @@ public class UserAppService {
 			while (resultSet.next()) {
 				User user = new User();
 
-				user.setId(resultSet.getString("Id"));
-				user.setEmail(resultSet.getString("Email"));
-				user.setName(resultSet.getString("Name"));
-				user.setGender(resultSet.getString("Gender"));
-				user.setCity(resultSet.getString("City"));
-				user.setPassword(resultSet.getString("Password"));
-				user.setRole(resultSet.getString("Role"));
+				user.setId(resultSet.getString("Id") == null ? "" : resultSet.getString("Id"));
+				user.setEmail(resultSet.getString("Email") == null ? "" : resultSet.getString("Email"));
+				user.setName(resultSet.getString("Name") == null ? "" : resultSet.getString("Name"));
+				user.setHobies(resultSet.getString("Hobies") == null ? "" : resultSet.getString("Hobies"));
+				user.setCity(resultSet.getString("City") == null ? "" : resultSet.getString("City"));
+				user.setPassword(resultSet.getString("Password") == null ? "" : resultSet.getString("Password"));
+				user.setLinkName(resultSet.getString("LinkName") == null ? "" : resultSet.getString("LinkName"));
+				user.setAddress(resultSet.getString("Address") == null ? "" : resultSet.getString("Address"));
+				user.setPhone(resultSet.getString("Phone") == null ? "" : resultSet.getString("Phone"));
+				user.setSchoolName(resultSet.getString("SchoolName") == null ? "" : resultSet.getString("SchoolName"));
+				user.setBusiness(resultSet.getString("Business") == null ? "" : resultSet.getString("Business"));
+				user.setWebSite(resultSet.getString("WebSite") == null ? "" : resultSet.getString("WebSite"));
+				user.setFacebookName(resultSet.getString("FacebookName") == null ? "" : resultSet.getString("FacebookName"));
+				user.setTwitterName(resultSet.getString("TwitterName") == null ? "" : resultSet.getString("TwitterName"));
+				user.setGender(resultSet.getString("Gender") == null ? "" : resultSet.getString("Gender"));
+				user.setRole(resultSet.getString("Role") == null ? "" : resultSet.getString("Role"));
 
 				users.add(user);
 			}

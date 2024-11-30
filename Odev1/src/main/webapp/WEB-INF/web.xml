@@ -11,7 +11,11 @@
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 		<welcome-file>default.htm</welcome-file>
+		<welcome-file>Login.jsp</welcome-file>
 	</welcome-file-list>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
 	<context-param>
 		<param-name>dbUrl</param-name>
 		<param-value>jdbc:postgresql://dpg-ct4cdttds78s73bhu7s0-a.frankfurt-postgres.render.com:5432/odev1</param-value>
