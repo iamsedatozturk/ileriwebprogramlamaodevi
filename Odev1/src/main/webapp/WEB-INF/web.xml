@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
-  <display-name>Odev1</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>Users.jsp</welcome-file>
-  </welcome-file-list>
-  <context-param>
-  	<param-name>dbUrl</param-name>
-  	<param-value>jdbc:postgresql://dpg-ct4cdttds78s73bhu7s0-a.frankfurt-postgres.render.com:5432/odev1</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>dbUser</param-name>
-  	<param-value>sa</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>dbPassword</param-name>
-  	<param-value>qNgqTkPT8lnyPhO92vofBAiaQcHZpAsk</param-value>
-  </context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+	id="WebApp_ID" version="5.0">
+	<display-name>İleri Programlama Ödevi</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>dbUrl</param-name>
+		<param-value>jdbc:postgresql://dpg-ct4cdttds78s73bhu7s0-a.frankfurt-postgres.render.com:5432/odev1</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbUser</param-name>
+		<param-value>sa</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbPassword</param-name>
+		<param-value>qNgqTkPT8lnyPhO92vofBAiaQcHZpAsk</param-value>
+	</context-param>
 </web-app>
