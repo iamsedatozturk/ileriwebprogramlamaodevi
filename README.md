@@ -1,12 +1,10 @@
 # İLERİ WEB PROGRAMLAMA ÖDEVİ 
 
-> Dosyayı WAR olarak Export etmek gerekiyor.
-  - WAR dosyasını Tomcat'in webapps klasörüne kopyalıyoruz
+> Eclipse üzerinden projeyi WAR Export ediyoruz.
 
-- Dockerfile Ayarları
+> Dockerfile Ayarları
 ````
-FROM tomcat:9.0-jdk11
-COPY target/your-project.war /usr/local/tomcat/webapps/
+FROM tomcat:11.0-jdk21
+COPY ./Odev1/Odev1.war /usr/local/tomcat/webapps/
 CMD ["catalina.sh", "run"]
 ````
-
