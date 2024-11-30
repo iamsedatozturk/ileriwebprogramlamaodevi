@@ -1,4 +1,4 @@
-package com.odev;
+package com.odev.entities;
 
 public class User {
     private String id;

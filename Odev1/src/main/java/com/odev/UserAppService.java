@@ -4,18 +4,22 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+import com.odev.application.DatabaseConnection;
+import com.odev.entities.User;
+
+public class UserAppService {
 
     public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM public.\"Users\"";
         
         try (Connection connection = DatabaseConnection.connect();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
+        	PreparedStatement statement = connection.prepareStatement(query);
+        	ResultSet resultSet = statement.executeQuery()) {
             
             while (resultSet.next()) {
                 User user = new User();
+                
                 user.setId(resultSet.getString("Id"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setName(resultSet.getString("Name"));
@@ -27,6 +31,7 @@ public class UserDAO {
                 users.add(user);
             }
         }
+        
         return users;
     }
 }

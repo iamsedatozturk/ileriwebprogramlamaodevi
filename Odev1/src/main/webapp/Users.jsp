@@ -1,10 +1,13 @@
+<%@page import="com.odev.session.SessionManager"%>
+<%@page import="com.odev.UserAppService"%>
 <%@ page import="java.util.*, java.sql.*" %>
-<%@ page import="com.odev.UserDAO" %>
-<%@ page import="com.odev.User" %>
+<%@ page import="com.odev.entities.User" %>
+<%@ page import="com.odev.entities.User" %>
 
 <%
-    UserDAO userDAO = new UserDAO();
-    List<User> users = userDAO.getAllUsers();
+	UserAppService userAppService = new UserAppService();
+	List<User> users = userAppService.getAllUsers();
+    //List<User> users = (List<User>) request.getAttribute("users");
 %>
 
 <!DOCTYPE html>
@@ -15,6 +18,7 @@
 </head>
 <body>
     <h2>Users List</h2>
+    <div><% SessionManager.getAttribute("username"); %></div>
     <table border="1">
         <thead>
             <tr>
