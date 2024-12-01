@@ -15,7 +15,9 @@
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="layout">
 		<main class="content">
-			
+			<div class="logo-container">
+				<img src="./Images/ben.png" alt="Sedat Öztürk">
+			</div>
 		</main>
 	</div>
 </body>

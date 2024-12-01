@@ -1,10 +1,13 @@
 package com.odev.entities;
 
+import java.util.List;
+import java.util.UUID;
+
 public class User {
-    private String id;
+    private UUID id;
     private String email;
     private String name;
-    private String hobies;
+    private List<String> hobbies;
     private String city;
     private String password;
     private String linkName;
@@ -16,14 +19,15 @@ public class User {
     private String facebookName;
     private String twitterName;
     private String role;
-    private String gender;
-
+    private Integer gender;
+    private String picture;
+    
     // id
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -46,14 +50,14 @@ public class User {
     }
 
     // hobies
-    public String getHobies() {
-        return hobies;
+    public List<String> getHobbies() {
+        return hobbies;
     }
 
-    public void setHobies(String hobies) {
-        this.hobies = hobies;
+    public void setHobbies(List<String> hobbies) {
+        this.hobbies = hobbies;
     }
-
+    
     // city
     public String getCity() {
         return city;
@@ -154,11 +158,20 @@ public class User {
     }
     
  // gender
-    public String getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
+    }
+    
+ // pictıre
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

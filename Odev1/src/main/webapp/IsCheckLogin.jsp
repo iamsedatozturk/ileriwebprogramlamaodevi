@@ -9,7 +9,7 @@ if (sessionUser instanceof User) {
 	login = (User) sessionUser;
 }
 
-if (login.getId() == null) {
+if (login.getName() == null) {
 	response.sendRedirect("./Login.jsp");
 	return;
 }
