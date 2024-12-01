@@ -60,7 +60,7 @@ ListUserAndRowCount listUserAndRowCount = userAppService.getAllUsers(searchName,
 						<td style="text-align: center; vertical-align: middle;"><img
 							src="<%=user.getPicture() != "" ? user.getPicture() : "Images/default-profile.png"%>"
 							alt="Profil Resmi" style="width: 50px; border-radius: 50%;" /></td>
-						<td><%=user.getName()%></td>
+						<td><a href="User.jsp?Id=<%=user.getId() %>"><%=user.getName() %></a></td>
 						<td><%=user.getEmail()%></td>
 						<td><%=user.getGender() == 0 ? "Erkek" : "Kadın"%></td>
 						<td><%=user.getCity()%></td>

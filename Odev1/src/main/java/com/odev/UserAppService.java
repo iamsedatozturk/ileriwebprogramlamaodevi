@@ -58,6 +58,51 @@ public class UserAppService {
 		return user;
 	}
 
+	public User getUser(String id) throws SQLException, ClassNotFoundException {
+		User user = null;
+
+		String query = "SELECT * FROM public.\"Users\" WHERE \"Id\" = ? ";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+
+			statement.setObject(1, UUID.fromString(id), java.sql.Types.OTHER);
+			
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					user = new User();
+
+					Array hobbiesArray = resultSet.getArray("Hobbies");
+					if (hobbiesArray != null) {
+						user.setHobbies(Arrays.asList((String[]) hobbiesArray.getArray()));
+					}
+
+					user.setId(UUID.fromString(resultSet.getString("Id")));
+					user.setEmail(resultSet.getString("Email") == null ? "" : resultSet.getString("Email"));
+					user.setName(resultSet.getString("Name") == null ? "" : resultSet.getString("Name"));
+					user.setCity(resultSet.getString("City") == null ? "" : resultSet.getString("City"));
+					user.setPassword(resultSet.getString("Password") == null ? "" : resultSet.getString("Password"));
+					user.setLinkName(resultSet.getString("LinkName") == null ? "" : resultSet.getString("LinkName"));
+					user.setAddress(resultSet.getString("Address") == null ? "" : resultSet.getString("Address"));
+					user.setPhone(resultSet.getString("Phone") == null ? "" : resultSet.getString("Phone"));
+					user.setSchoolName(
+							resultSet.getString("SchoolName") == null ? "" : resultSet.getString("SchoolName"));
+					user.setBusiness(resultSet.getString("Business") == null ? "" : resultSet.getString("Business"));
+					user.setWebSite(resultSet.getString("WebSite") == null ? "" : resultSet.getString("WebSite"));
+					user.setFacebookName(
+							resultSet.getString("FacebookName") == null ? "" : resultSet.getString("FacebookName"));
+					user.setTwitterName(
+							resultSet.getString("TwitterName") == null ? "" : resultSet.getString("TwitterName"));
+					user.setGender(resultSet.getInt("Gender"));
+					user.setRole(resultSet.getString("Role") == null ? "" : resultSet.getString("Role"));
+					user.setPicture(resultSet.getString("Picture") == null ? "" : resultSet.getString("Picture"));
+				}
+			}
+		}
+
+		return user;
+	}
+	
 	public int getTotalUsers(String searchName) throws SQLException, ClassNotFoundException{
 		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Users\" WHERE 1=1";
 

@@ -216,6 +216,12 @@ form {
 	flex-direction: column;
 }
 
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+
 label {
 	margin-top: 10px;
 	font-weight: bold;
