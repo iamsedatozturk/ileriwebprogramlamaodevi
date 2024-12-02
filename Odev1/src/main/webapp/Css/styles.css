@@ -105,6 +105,9 @@ caption {
 	font-size: 16px;
 }
 
+.divCenter {
+	text-align: center;
+}
 
 /* RESPONSİVE TABLO */
 @media ( max-width : 600px) {
@@ -203,7 +206,7 @@ nav ul li {
 
 /* LAYOUT */
 .content {
-	margin-left: 0; 
+	margin-left: 0;
 	padding: 20px;
 	transition: margin-left 0.3s;
 	flex: 1;
@@ -221,16 +224,16 @@ form {
 	flex-direction: column;
 }
 
-
 label {
 	margin-top: 10px;
 	font-weight: bold;
+	text-align: left;
 }
 
-input, select {
+input, select, textarea {
 	margin-bottom: 10px;
 	padding: 8px;
-	font-size: 16px;
+	font-size:16px;
 }
 
 button {
@@ -253,4 +256,31 @@ button:hover {
 	border: 1px solid #f1b0b7;
 	display: inline-block;
 	color: #721c24;
+}
+
+/*Register*/
+.register-content {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	margin-top: 50px;
+	
+}
+.register-container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-button {
+	margin-top: 10px;
+	display: block;
+	text-align: center;
+	color: black;
+	font-size: 14px;
 }

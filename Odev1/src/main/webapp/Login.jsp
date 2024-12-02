@@ -18,7 +18,9 @@
 			<input type="password" value="1"
 				name="password" placeholder="Şifre" required>
 			<button type="submit">Giriş Yap</button>
-		</form>
+		</form>	
+		
+		<a href="Register.jsp" class="register-button">Kayıt Ol</a>	
 	</div>
 </body>
 </html>

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
-import com.odev.entities.ListUserAndRowCount;
+import com.odev.entities.PagedResultRequestDto;
 import com.odev.entities.User;
 
 public class UserAppService {
@@ -58,6 +58,49 @@ public class UserAppService {
 		return user;
 	}
 
+	public boolean registerUser(User user) throws ClassNotFoundException {
+        boolean result = false;
+        
+        
+        String query = "INSERT INTO public.\"Users\" (\"Id\", \"Email\", \"Name\", \"Password\", \"Phone\", \"City\", \"Address\", \"SchoolName\", \"Business\", \"WebSite\", \"FacebookName\", \"TwitterName\", \"Gender\", \"Role\", \"Picture\", \"Hobbies\") " +
+                		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setObject(1, user.getId());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getName());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getPhone());
+            statement.setString(6, user.getCity());
+            statement.setString(7, user.getAddress());
+            statement.setString(8, user.getSchoolName());
+            statement.setString(9, user.getBusiness());
+            statement.setString(10, user.getWebSite());
+            statement.setString(11, user.getFacebookName());
+            statement.setString(12, user.getTwitterName());
+            statement.setInt(13, user.getGender());
+            statement.setString(14, user.getRole());
+            statement.setString(15, user.getPicture());
+            if (user.getHobbies() != null) {
+            	statement.setArray(16, connection.createArrayOf("text", user.getHobbies().toArray(new String[0])));
+			} else {
+				statement.setNull(16, java.sql.Types.ARRAY);
+			}
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+	
 	public User getUser(String id) throws SQLException, ClassNotFoundException {
 		User user = null;
 
@@ -85,14 +128,11 @@ public class UserAppService {
 					user.setLinkName(resultSet.getString("LinkName") == null ? "" : resultSet.getString("LinkName"));
 					user.setAddress(resultSet.getString("Address") == null ? "" : resultSet.getString("Address"));
 					user.setPhone(resultSet.getString("Phone") == null ? "" : resultSet.getString("Phone"));
-					user.setSchoolName(
-							resultSet.getString("SchoolName") == null ? "" : resultSet.getString("SchoolName"));
+					user.setSchoolName(resultSet.getString("SchoolName") == null ? "" : resultSet.getString("SchoolName"));
 					user.setBusiness(resultSet.getString("Business") == null ? "" : resultSet.getString("Business"));
 					user.setWebSite(resultSet.getString("WebSite") == null ? "" : resultSet.getString("WebSite"));
-					user.setFacebookName(
-							resultSet.getString("FacebookName") == null ? "" : resultSet.getString("FacebookName"));
-					user.setTwitterName(
-							resultSet.getString("TwitterName") == null ? "" : resultSet.getString("TwitterName"));
+					user.setFacebookName(resultSet.getString("FacebookName") == null ? "" : resultSet.getString("FacebookName"));
+					user.setTwitterName(resultSet.getString("TwitterName") == null ? "" : resultSet.getString("TwitterName"));
 					user.setGender(resultSet.getInt("Gender"));
 					user.setRole(resultSet.getString("Role") == null ? "" : resultSet.getString("Role"));
 					user.setPicture(resultSet.getString("Picture") == null ? "" : resultSet.getString("Picture"));
@@ -103,31 +143,7 @@ public class UserAppService {
 		return user;
 	}
 	
-	public int getTotalUsers(String searchName) throws SQLException, ClassNotFoundException{
-		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Users\" WHERE 1=1";
-
-		if (searchName != null && !searchName.isEmpty()) {
-	        query += " AND LOWER(\"Name\") LIKE LOWER(?)";
-	    }
-		
-	    try (Connection connection = DatabaseConnection.connect();
-    		PreparedStatement statement = connection.prepareStatement(query)) {
-
-	    	if (searchName != null && !searchName.isEmpty()) {
-				statement.setString(1, "%" + searchName + "%");
-	        }
-	    	
-        	ResultSet rs = statement.executeQuery();
-	        if (rs.next()) {
-	            return rs.getInt("total");
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return 0;
-	}
-	
-	public ListUserAndRowCount getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
+	public PagedResultRequestDto getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<User> users = new ArrayList<>();
 		int i = 0;
 		
@@ -185,13 +201,48 @@ public class UserAppService {
 
 		int totalCount = getTotalUsers(searchName);
 		
-		return new ListUserAndRowCount(users, totalCount);
+		return new PagedResultRequestDto(users, totalCount);
 	}
 
+	public int getTotalUsers(String searchName) throws SQLException, ClassNotFoundException{
+		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Users\" WHERE 1=1";
+
+		if (searchName != null && !searchName.isEmpty()) {
+	        query += " AND LOWER(\"Name\") LIKE LOWER(?)";
+	    }
+		
+	    try (Connection connection = DatabaseConnection.connect();
+    		PreparedStatement statement = connection.prepareStatement(query)) {
+
+	    	if (searchName != null && !searchName.isEmpty()) {
+				statement.setString(1, "%" + searchName + "%");
+	        }
+	    	
+        	ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt("total");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return 0;
+	}
+	
 	public boolean updateProfile(User user) {
-		String query = "UPDATE public.\"Users\" SET \"Name\" = ?, \"Email\" = ?, \"Password\" = ?, \"Phone\" = ?, \"City\" = ?, \"Address\" = ?, "
-				+ "\"SchoolName\" = ?, \"Business\" = ?, \"Hobbies\" = ?, \"WebSite\" = ?, \"FacebookName\" = ?, \"TwitterName\" = ?, "
-				+ "\"Role\" = ?, \"Gender\" = ? WHERE \"Id\" = ?";
+		String query = "";
+		
+		if (user.getPicture() == "") {
+			query = "UPDATE public.\"Users\" SET \"Name\" = ?, \"Email\" = ?, \"Password\" = ?, \"Phone\" = ?, \"City\" = ?, \"Address\" = ?, "
+					+ "\"SchoolName\" = ?, \"Business\" = ?, \"Hobbies\" = ?, \"WebSite\" = ?, \"FacebookName\" = ?, \"TwitterName\" = ?, "
+					+ "\"Role\" = ?, \"Gender\" = ? WHERE \"Id\" = ?";
+		}
+		else 
+		{
+			query = "UPDATE public.\"Users\" SET \"Name\" = ?, \"Email\" = ?, \"Password\" = ?, \"Phone\" = ?, \"City\" = ?, \"Address\" = ?, "
+					+ "\"SchoolName\" = ?, \"Business\" = ?, \"Hobbies\" = ?, \"WebSite\" = ?, \"FacebookName\" = ?, \"TwitterName\" = ?, "
+					+ "\"Role\" = ?, \"Gender\" = ?, \"Picture\" = ? WHERE \"Id\" = ?";
+		}
+		
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -207,7 +258,7 @@ public class UserAppService {
 
 			if (user.getHobbies() != null) {
 				preparedStatement.setArray(9,
-						connection.createArrayOf("text", user.getHobbies().toArray(new String[0])));
+				connection.createArrayOf("text", user.getHobbies().toArray(new String[0])));
 			} else {
 				preparedStatement.setNull(9, java.sql.Types.ARRAY);
 			}
@@ -217,8 +268,14 @@ public class UserAppService {
 			preparedStatement.setString(12, user.getTwitterName());
 			preparedStatement.setString(13, user.getRole());
 			preparedStatement.setInt(14, user.getGender());
-			preparedStatement.setObject(15, user.getId(), java.sql.Types.OTHER);
-			// user.setId(UUID.fromString("799a746c-3f90-4d83-b46c-9f5375645f44"));
+			if (user.getPicture() == "") {
+				preparedStatement.setObject(15, user.getId(), java.sql.Types.OTHER);
+			}
+			else
+			{
+				preparedStatement.setString(15, user.getPicture());			
+				preparedStatement.setObject(16, user.getId(), java.sql.Types.OTHER);
+			}
 
 			int rowsAffected = preparedStatement.executeUpdate();
 			return rowsAffected > 0;
@@ -227,22 +284,4 @@ public class UserAppService {
 			return false;
 		}
 	}
-
-	public boolean updateProfilePicture(String Id, String picturePath) {
-		String query = "UPDATE public.\"Users\" SET \"Picture\" = ? WHERE \"Id\" = ?";
-
-		try (Connection connection = DatabaseConnection.connect();
-				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-			preparedStatement.setString(1, picturePath);
-			preparedStatement.setObject(2, UUID.fromString(Id), java.sql.Types.OTHER);
-
-			int rowsUpdated = preparedStatement.executeUpdate();
-			return rowsUpdated > 0;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 }
