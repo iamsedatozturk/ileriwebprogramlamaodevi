@@ -29,7 +29,7 @@ if (user.getName() == null) {
 	<div class="layout">
 		<main class="content">
 			<img
-				src="<%=user.getPicture() != null ? user.getPicture() : "./Images/default-profile.png"%>"
+				src="<%=user.getPicture().length() > 0 ? user.getPicture() : "./Images/default-profile.png"%>"
 				alt="Profil Resmi"
 				style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;" />
 

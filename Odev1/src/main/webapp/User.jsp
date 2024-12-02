@@ -35,7 +35,7 @@ user = userAppService.getUser(id);
 				<div class="profile-image-container">
 					<div>
 						<img
-							src="<%=user.getPicture() != null ? user.getPicture() : "./Images/default-profile.png"%>"
+							src="<%=user.getPicture().length() > 0 ? user.getPicture() : "./Images/default-profile.png"%>"
 							alt="Profil Resmi" class="profile-image" />
 					</div>
 				</div>

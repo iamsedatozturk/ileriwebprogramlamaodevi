@@ -64,7 +64,7 @@ PagedResultRequestDto listUserAndRowCount = userAppService.getAllUsers(searchNam
 					%>
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img
-							src="<%=user.getPicture() != "" ? user.getPicture() : "Images/default-profile.png"%>"
+							src="<%=user.getPicture().length() > 0 ? user.getPicture() : "Images/default-profile.png"%>"
 							alt="Profil Resmi" style="width: 50px; border-radius: 50%;" /></td>
 						<td><a href="User.jsp?Id=<%=user.getId() %>"><%=user.getName() %></a></td>
 						<td><%=user.getEmail()%></td>
