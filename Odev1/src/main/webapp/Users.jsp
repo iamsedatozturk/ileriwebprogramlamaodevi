@@ -25,9 +25,15 @@ PagedResultRequestDto listUserAndRowCount = userAppService.getAllUsers(searchNam
 <meta charset="UTF-8">
 <title>Kişiler</title>
 <link rel="stylesheet" type="text/css" href="./Css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
+	<div class="toolbar">
+		<a href="MainPage.jsp" class="user_back-button"> <i
+			class="fa fa-arrow-left"></i>
+		</a>
+	</div>
 	<div class="layout">
 		<main class="content">
 			<form action="Users.jsp" method="get">

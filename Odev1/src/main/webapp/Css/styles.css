@@ -139,7 +139,7 @@ caption {
 
 /* HEADER */
 header {
-	background-color: #6496D5;
+	background-color: #39669e;
 	color: white;
 	padding: 10px 20px;
 	display: flex;
@@ -160,6 +160,12 @@ header .user-info a {
 	color: white;
 	text-decoration: none;
 	margin-left: 10px;
+}
+
+.toolbar {
+	background-color: #7ba7d6;
+	height: 40px;
+	display: flex;
 }
 
 /* HEADER MENÜ */
@@ -204,7 +210,7 @@ nav ul li {
 	flex: 1;
 }
 
-/* LAYOUT */
+/* ANA LAYOUT */
 .content {
 	margin-left: 0;
 	padding: 20px;
@@ -233,7 +239,7 @@ label {
 input, select, textarea {
 	margin-bottom: 10px;
 	padding: 8px;
-	font-size:16px;
+	font-size: 16px;
 }
 
 button {
@@ -258,23 +264,23 @@ button:hover {
 	color: #721c24;
 }
 
-/*Register*/
+/*REGİSTER*/
 .register-content {
 	display: flex;
 	align-content: center;
 	justify-content: center;
 	margin-top: 50px;
-	
 }
+
 .register-container {
-    background: #fff;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background: #fff;
+	padding: 20px 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 500px;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .register-button {
@@ -283,4 +289,84 @@ button:hover {
 	text-align: center;
 	color: black;
 	font-size: 14px;
+}
+
+/*USER*/
+.user_layout {
+	display: flex;
+	justify-content: center;
+}
+
+.user_content {
+	width: 100%;
+	background-color: white;
+	display: flex;
+	padding: 20px;
+}
+
+.profile-section {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.profile-image-container {
+	flex: 1;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+}
+
+.profile-image {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.user_info {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.user_info label {
+	font-weight: bold;
+}
+
+.user_back-button {
+	color: white;
+	padding: 10px;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: flex-start;
+}
+
+.user_back-button i {
+	margin-left: 8px;
+}
+
+.user_comments-info {
+	flex: 3;
+	background-color: #f9f9f9;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user_comments-info h3 {
+	margin-top: 0;
+}
+
+.user_comments-info ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.user_comments-info li {
+	margin-bottom: 10px;
+	font-size: 16px;
 }
