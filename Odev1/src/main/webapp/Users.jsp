@@ -4,7 +4,7 @@
 <%@ page import="com.odev.UserAppService"%>
 <%@ page import="java.util.*, java.sql.*"%>
 <%@ page import="com.odev.entities.User"%>
-<%@ page import="com.odev.entities.PagedResultRequestDto"%>
+<%@ page import="com.odev.entities.UserListDto"%>
 
 
 <%@ include file="./IsCheckLogin.jsp"%>
@@ -16,7 +16,7 @@ int pageSize = 5;
 int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 
 UserAppService userAppService = new UserAppService();
-PagedResultRequestDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo, pageSize);
+UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo, pageSize);
 %>
 
 <!DOCTYPE html>

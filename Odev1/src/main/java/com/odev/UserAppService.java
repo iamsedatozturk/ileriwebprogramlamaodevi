@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
-import com.odev.entities.PagedResultRequestDto;
+import com.odev.entities.UserListDto;
 import com.odev.entities.User;
 
 public class UserAppService {
@@ -101,7 +101,7 @@ public class UserAppService {
         return result;
     }
 	
-	public User getUser(String id) throws SQLException, ClassNotFoundException {
+	public User getUser(UUID id) throws SQLException, ClassNotFoundException {
 		User user = null;
 
 		String query = "SELECT * FROM public.\"Users\" WHERE \"Id\" = ? ";
@@ -109,7 +109,7 @@ public class UserAppService {
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
 
-			statement.setObject(1, UUID.fromString(id), java.sql.Types.OTHER);
+			statement.setObject(1, id, java.sql.Types.OTHER);
 			
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
@@ -143,7 +143,7 @@ public class UserAppService {
 		return user;
 	}
 	
-	public PagedResultRequestDto getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
+	public UserListDto getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<User> users = new ArrayList<>();
 		int i = 0;
 		
@@ -201,7 +201,7 @@ public class UserAppService {
 
 		int totalCount = getTotalUsers(searchName);
 		
-		return new PagedResultRequestDto(users, totalCount);
+		return new UserListDto(users, totalCount);
 	}
 
 	public int getTotalUsers(String searchName) throws SQLException, ClassNotFoundException{

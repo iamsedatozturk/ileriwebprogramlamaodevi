@@ -23,7 +23,7 @@ import com.odev.entities.User;
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-public class UpdateProfileServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
 	String UPLOAD_DIR = "Uploads";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

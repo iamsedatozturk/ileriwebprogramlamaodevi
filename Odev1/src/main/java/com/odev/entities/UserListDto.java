@@ -3,11 +3,11 @@ package com.odev.entities;
 import java.util.List;
 import java.util.UUID;
 
-public class PagedResultRequestDto {
+public class UserListDto {
     private List<User> users;
     private int rowCount;
     
-    public PagedResultRequestDto(List<User> users, int rowCount) {
+    public UserListDto(List<User> users, int rowCount) {
     	setUsers(users);
     	setRowCount(rowCount);
     }
