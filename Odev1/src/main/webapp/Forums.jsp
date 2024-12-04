@@ -46,26 +46,27 @@ Forum_ListDto listForumAndRowCount = forumAppService.getAllForums(searchName, pa
 	</div>
 	<div class="layout">
 		<main class="content">
-			<div class="forum">
+			<div class="newforum">
 				<form action="InsertForumsServlet" method="POST">
 					<input type="hidden" id="userId" name="userId" value="<%=profile.getId()%>" />
 	
-					<label for="title">Title:</label> 
-					<input type="text" id="title" name="title" required	placeholder="Başlık giriniz" />
+					<label for="title">Başlık:</label> 
+					<input type="text" id="title" name="title" autofocus required placeholder="Başlık giriniz" />
 	
 					<label for="comment">Yorum:</label> 
-					<textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:98%" required></textarea>
+					<textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:99%" required></textarea>
 					
-					<button type="submit">Kaydet</button>
+					<div class="text-right">
+						<button style="width: 120px" type="submit">Kaydet</button>
+					</div>
 				</form>
 			</div>
-
+			
 			<form action="Forum.jsp" method="get">
 				<div>
-					<label for="searchName">FİLTRE:</label> <input type="text"
-						id="searchName" name="searchName" value="<%=searchName%>">
+					<input type="text" id="searchName" name="searchName" placeholder="Filtre" value="<%=searchName%>">
 
-					<button type="submit">Filtrele</button>
+					<button type="submit">Uygula</button>
 				</div>
 			</form>
 

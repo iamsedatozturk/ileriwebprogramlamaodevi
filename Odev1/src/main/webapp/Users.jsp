@@ -35,10 +35,10 @@
 		<main class="content">
 			<form action="Users.jsp" method="get">
 				<div>
-					<label for="searchName">FİLTRE:</label> <input type="text"
-						id="searchName" name="searchName" value="<%=searchName%>">
+					<label for="searchName"></label> 
+					<input type="text" id="searchName" name="searchName" placeholder="Filtre" value="<%=searchName%>">
 
-					<button type="submit">Filtrele</button>
+					<button type="submit">Uygula</button>
 				</div>
 			</form>
 

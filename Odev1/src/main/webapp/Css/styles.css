@@ -243,8 +243,8 @@ input, select, textarea {
 }
 
 button {
-	padding: 10px;
-	font-size: 16px;
+	padding: 7px;
+	font-size: 13px;
 	background-color: #689acf;
 	color: white;
 	border: none;
@@ -561,8 +561,23 @@ button:hover {
 	text-align: center;
 }
 
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.newforum {
+	margin-bottom: 5px;
+	border: 1px solid gray;
+	padding: 5px;
+}
+
 .forum {
 	margin-bottom: 5px;
+	padding: 5px;
 }
 
 .forum .title {
