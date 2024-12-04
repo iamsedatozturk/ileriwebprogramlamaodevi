@@ -128,10 +128,7 @@
 					<label for="female">Kadın</label>
 				</div>
 
-				<label for="role">Rol:</label> <select id="role" name="role">
-					<option value="User">Kullanıcı</option>
-					<option value="Admin">Admin</option>
-				</select> <label for="picture">Profil Resmi:</label> <input type="file"
+				<label for="picture">Profil Resmi:</label> <input type="file"
 					id="picture" name="picture" accept="image/*" /> <label
 					for="hobbies">Hobiler:</label>
 				<div class="hobbies">

@@ -90,22 +90,23 @@ public class ProfileServlet extends HttpServlet {
 		user.setWebSite(webSite);
 		user.setFacebookName(facebookName);
 		user.setTwitterName(twitterName);
-		user.setRole(role);
 		user.setGender(gender);
 		user.setHobbies(hobbies);
+		user.setRole(role);
 		
 		HttpSession mySession = request.getSession();
+		Object sessionUser = mySession.getAttribute("user");
+		
 		if (isFileUploaded) {
 			user.setPicture(picturePath);
 		}
 		else
 		{
-			Object sessionUser = mySession.getAttribute("user");
 			if (sessionUser instanceof Users) {
 				user.setPicture(((Users) sessionUser).getPicture());
 			}
 		}
-
+		
 		UsersAppService userAppService = new UsersAppService();
 		boolean isSave = userAppService.updateProfile(user);
 

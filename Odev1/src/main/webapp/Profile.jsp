@@ -182,14 +182,12 @@ if (profile.getName() == null) {
 					id="facebookName" name="facebookName"
 					value="<%=profile.getFacebookName()%>" /> <label for="twitterName">Twitter:</label>
 				<input type="text" id="twitterName" name="twitterName"
-					value="<%=profile.getTwitterName()%>" /> <label for="role">Rol:</label>
+					value="<%=profile.getTwitterName()%>" /> 
 					
-			
-				<select id="role" name="role">
-					<option value="Admin"
-						<%="Admin".equals(profile.getRole()) ? "selected" : ""%>>Admin</option>
-					<option value="User"
-						<%="User".equals(profile.getRole()) ? "selected" : ""%>>User</option>
+				<label for="role">Rol: </label>
+				<select id="role" name="role" style="pointer-events: none; background-color: #f0f0f0;">
+				    <option value="Admin" <%="Admin".equals(profile.getRole()) ? "selected" : ""%>>Admin</option>
+				    <option value="User" <%="User".equals(profile.getRole()) ? "selected" : ""%>>User</option>
 				</select> 
 				
 				

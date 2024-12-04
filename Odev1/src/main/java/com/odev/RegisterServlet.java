@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
         String facebookName = request.getParameter("facebookName");
         String twitterName = request.getParameter("twitterName");
         String gender = request.getParameter("gender");
-        String role = request.getParameter("role");
+        String role = "User";
 
         List<String> hobbies = new ArrayList<>();
         String[] selectedHobbies = request.getParameterValues("hobbies");
