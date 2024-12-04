@@ -5,14 +5,12 @@ import java.sql.Timestamp;
 import java.util.UUID;
 import com.odev.*;
 
-public class Comment {
+public class Users_Messages {
     private UUID id;
     private Timestamp createTime;
-    private UUID userId;
-    private String type;
-    private String media;
+    private UUID commentId;
     private UUID creatorId;
-    private String comment;
+    private String message;
 
     private String creatorName;
     private String creatorPicture;
@@ -35,33 +33,15 @@ public class Comment {
         this.createTime = createTime;
     }
     
-    // userId
-    public UUID getUserId() {
-        return userId;
+    // commentId
+    public UUID getCommentId() {
+        return commentId;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setCommentId(UUID commentId) {
+        this.commentId = commentId;
     }
     
-    // type
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    // media
-    public String getMedia() {
-        return media;
-    }
-
-    public void setMedia(String media) {
-        this.media = media;
-    }
-
     // creatorId
     public UUID getCreatorId() {
         return creatorId;
@@ -72,12 +52,12 @@ public class Comment {
     }
 
     // comment
-    public String getComment() {
-        return comment;
+    public String getMessage() {
+        return message;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     // creatorName
@@ -86,7 +66,7 @@ public class Comment {
     }
 
     public void setCreatorName(UUID creatorId) throws ClassNotFoundException, SQLException {
-    	UserAppService userAppService = new UserAppService();
+    	UsersAppService userAppService = new UsersAppService();
     	
         this.creatorName =  userAppService.getUser(creatorId).getName();
     }
@@ -97,7 +77,7 @@ public class Comment {
     }
 
     public void setCreatorPicture(UUID creatorId) throws ClassNotFoundException, SQLException {
-    	UserAppService userAppService = new UserAppService();
+    	UsersAppService userAppService = new UsersAppService();
     	
         this.creatorPicture =  userAppService.getUser(creatorId).getPicture();
     }

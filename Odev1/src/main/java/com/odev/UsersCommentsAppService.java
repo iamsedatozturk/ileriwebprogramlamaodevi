@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
-import com.odev.entities.Comment;
-import com.odev.entities.CommentListDto;
-import com.odev.entities.User;
+import com.odev.entities.Users_Comments;
+import com.odev.entities.Users_CommentsListDto;
+import com.odev.entities.Users;
 
-public class CommentAppService {
-	public boolean insertComment(Comment comment) {
+public class UsersCommentsAppService {
+	public boolean insertComment(Users_Comments comment) {
         String query = "INSERT INTO public.\"Users_Comments\" (\"Id\", \"UserId\", \"Type\", \"Media\", \"CreatorId\", \"Comment\") " +
         		"VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -50,8 +50,8 @@ public class CommentAppService {
 		}
 	}
 	
-	public CommentListDto getAllComments(UUID UserId, int page, int pageSize) throws SQLException, ClassNotFoundException {
-		List<Comment> comments = new ArrayList<>();
+	public Users_CommentsListDto getAllComments(UUID UserId, int page, int pageSize) throws SQLException, ClassNotFoundException {
+		List<Users_Comments> comments = new ArrayList<>();
 		
 		String query = "SELECT * FROM public.\"Users_Comments\" WHERE \"UserId\" = ? ORDER BY \"CreateTime\" DESC LIMIT ? OFFSET ?";
 
@@ -64,7 +64,7 @@ public class CommentAppService {
 				
 				try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					Comment comment = new Comment();
+					Users_Comments comment = new Users_Comments();
 	
 					comment.setId(resultSet.getString("Id") == null ? null : UUID.fromString(resultSet.getString("Id")));
 					comment.setCreateTime(resultSet.getTimestamp("CreateTime") == null ? null : resultSet.getTimestamp("CreateTime"));
@@ -83,7 +83,7 @@ public class CommentAppService {
 
 		int totalCount = getTotalComments(UserId);
 		
-		return new CommentListDto(comments, totalCount);
+		return new Users_CommentsListDto(comments, totalCount);
 	}
 	
 	public int getTotalComments(UUID UserId) throws SQLException, ClassNotFoundException{

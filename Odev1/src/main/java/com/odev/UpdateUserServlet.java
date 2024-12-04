@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import com.odev.entities.User;
+import com.odev.entities.Users;
 
 @SuppressWarnings("serial")
 @WebServlet("/UpdateUserServlet")
@@ -24,7 +24,7 @@ public class UpdateUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 
-		UserAppService userAppService = new UserAppService();
+		UsersAppService userAppService = new UsersAppService();
 		boolean isSave = userAppService.updateAdminRoleAl(UUID.fromString(id));
 
 		if (isSave) {

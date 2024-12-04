@@ -1,6 +1,6 @@
 package com.odev;
 
-import com.odev.entities.Comment;
+import com.odev.entities.Users_Comments;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -51,7 +51,7 @@ public class InsertCommentServlet extends HttpServlet {
 			}
 		}
 
-        Comment newComment = new Comment();
+        Users_Comments newComment = new Users_Comments();
         newComment.setId(id);
         newComment.setUserId(UUID.fromString(userId));
         newComment.setCreatorId(UUID.fromString(creatorId));
@@ -66,7 +66,7 @@ public class InsertCommentServlet extends HttpServlet {
         }
         newComment.setComment(comment);
         
-        CommentAppService commentAppService = new CommentAppService();
+        UsersCommentsAppService commentAppService = new UsersCommentsAppService();
         boolean isSave = false;
         
 		isSave = commentAppService.insertComment(newComment);

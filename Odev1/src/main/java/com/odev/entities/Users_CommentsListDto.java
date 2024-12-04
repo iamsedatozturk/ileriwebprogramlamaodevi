@@ -2,21 +2,21 @@ package com.odev.entities;
 
 import java.util.List;
 
-public class CommentListDto {
-    private List<Comment> comments;
+public class Users_CommentsListDto {
+    private List<Users_Comments> comments;
     private int rowCount;
     
-    public CommentListDto(List<Comment> comments, int rowCount) {
+    public Users_CommentsListDto(List<Users_Comments> comments, int rowCount) {
     	setComments(comments);
     	setRowCount(rowCount);
     }
     
     // Comments
-    public List<Comment> getComments() {
+    public List<Users_Comments> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<Users_Comments> comments) {
         this.comments = comments;
     }
 

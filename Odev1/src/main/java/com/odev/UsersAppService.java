@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
-import com.odev.entities.UserListDto;
-import com.odev.entities.User;
+import com.odev.entities.Users_ListDto;
+import com.odev.entities.Users;
 
-public class UserAppService {
+public class UsersAppService {
 
-	public User validateUser(String email, String password) throws SQLException, ClassNotFoundException {
-		User user = null;
+	public Users validateUser(String email, String password) throws SQLException, ClassNotFoundException {
+		Users user = null;
 
 		String query = "SELECT * FROM public.\"Users\" WHERE \"Email\" = ? AND \"Password\" = ?";
 
@@ -25,7 +25,7 @@ public class UserAppService {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					user = new User();
+					user = new Users();
 
 					Array hobbiesArray = resultSet.getArray("Hobbies");
 					if (hobbiesArray != null) {
@@ -58,7 +58,7 @@ public class UserAppService {
 		return user;
 	}
 
-	public boolean registerUser(User user) throws ClassNotFoundException {
+	public boolean registerUser(Users user) throws ClassNotFoundException {
         boolean result = false;
         
         
@@ -101,8 +101,8 @@ public class UserAppService {
         return result;
     }
 	
-	public User getUser(UUID id) throws SQLException, ClassNotFoundException {
-		User user = null;
+	public Users getUser(UUID id) throws SQLException, ClassNotFoundException {
+		Users user = null;
 
 		String query = "SELECT * FROM public.\"Users\" WHERE \"Id\" = ? ";
 
@@ -113,7 +113,7 @@ public class UserAppService {
 			
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					user = new User();
+					user = new Users();
 
 					Array hobbiesArray = resultSet.getArray("Hobbies");
 					if (hobbiesArray != null) {
@@ -143,8 +143,8 @@ public class UserAppService {
 		return user;
 	}
 	
-	public UserListDto getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
-		List<User> users = new ArrayList<>();
+	public Users_ListDto getAllUsers(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
+		List<Users> users = new ArrayList<>();
 		int i = 0;
 		
 		String query = "SELECT * FROM public.\"Users\" WHERE 1=1";
@@ -170,7 +170,7 @@ public class UserAppService {
 				
 				try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					User user = new User();
+					Users user = new Users();
 	
 					Array hobbiesArray = resultSet.getArray("Hobbies");
 					if (hobbiesArray != null) {
@@ -201,7 +201,7 @@ public class UserAppService {
 
 		int totalCount = getTotalUsers(searchName);
 		
-		return new UserListDto(users, totalCount);
+		return new Users_ListDto(users, totalCount);
 	}
 
 	public int getTotalUsers(String searchName) throws SQLException, ClassNotFoundException{
@@ -228,7 +228,7 @@ public class UserAppService {
 	    return 0;
 	}
 	
-	public boolean updateProfile(User user) {
+	public boolean updateProfile(Users user) {
 		String query = "";
 		
 		if (user.getPicture() == "") {

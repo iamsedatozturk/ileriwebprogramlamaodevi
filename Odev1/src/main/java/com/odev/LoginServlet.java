@@ -3,7 +3,7 @@ package com.odev;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.odev.entities.User;
+import com.odev.entities.Users;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,8 +20,8 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		UserAppService userAppService = new UserAppService();
-		User user = new User();
+		UsersAppService userAppService = new UsersAppService();
+		Users user = new Users();
 
 		try {
 			user = userAppService.validateUser(username, password);

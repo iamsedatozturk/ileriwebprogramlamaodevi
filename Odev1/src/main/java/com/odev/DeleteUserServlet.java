@@ -13,7 +13,7 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String id = request.getParameter("id");
 
-    	UserAppService userAppService = new UserAppService();
+    	UsersAppService userAppService = new UsersAppService();
         boolean isSave = false;
         
 		isSave = userAppService.deleteUser(UUID.fromString(id));

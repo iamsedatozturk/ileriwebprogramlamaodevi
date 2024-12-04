@@ -1,12 +1,12 @@
-<%@ page import="com.odev.entities.User"%>
+<%@ page import="com.odev.entities.Users"%>
 
 <%
 HttpSession mySession = request.getSession();
-User login = new User();
+Users login = new Users();
 
 Object sessionUser = mySession.getAttribute("user");
-if (sessionUser instanceof User) {
-	login = (User) sessionUser;
+if (sessionUser instanceof Users) {
+	login = (Users) sessionUser;
 }
 
 if (login.getName() == null) {

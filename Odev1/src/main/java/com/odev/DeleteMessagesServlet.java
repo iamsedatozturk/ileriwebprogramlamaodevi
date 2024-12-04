@@ -14,7 +14,7 @@ public class DeleteMessagesServlet extends HttpServlet {
     	String messageId = request.getParameter("messageId");
     	String userId = request.getParameter("userId");
 
-        MessagesAppService messageAppService = new MessagesAppService();
+        UsersMessagesAppService messageAppService = new UsersMessagesAppService();
         boolean isSave = false;
         
 		isSave = messageAppService.deleteMessage(UUID.fromString(messageId));

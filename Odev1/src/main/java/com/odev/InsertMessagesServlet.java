@@ -1,6 +1,6 @@
 package com.odev;
 
-import com.odev.entities.Messages;
+import com.odev.entities.Users_Messages;
 
 import java.io.*;
 import jakarta.servlet.*;
@@ -19,13 +19,13 @@ public class InsertMessagesServlet extends HttpServlet {
         String userId = request.getParameter("userId");
         String message = request.getParameter("message");
     	
-    	Messages newMessage= new Messages();
+    	Users_Messages newMessage= new Users_Messages();
     	newMessage.setId(id);
     	newMessage.setCreatorId(UUID.fromString(creatorId));
     	newMessage.setCommentId(UUID.fromString(commentId));
     	newMessage.setMessage(message);
         
-        MessagesAppService messageAppService = new MessagesAppService();
+        UsersMessagesAppService messageAppService = new UsersMessagesAppService();
         boolean isSave = false;
         
 		isSave = messageAppService.insertMessage(newMessage);

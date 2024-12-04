@@ -3,7 +3,7 @@ package com.odev.entities;
 import java.util.List;
 import java.util.UUID;
 
-public class User {
+public class Users {
     private UUID id;
     private String email;
     private String name;

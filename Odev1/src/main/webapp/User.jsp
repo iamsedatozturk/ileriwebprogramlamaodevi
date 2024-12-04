@@ -1,12 +1,12 @@
-<%@page import="com.odev.MessagesAppService"%>
-<%@page import="com.odev.entities.Messages"%>
-<%@page import="com.odev.entities.Comment"%>
-<%@page import="com.odev.entities.CommentListDto"%>
-<%@page import="com.odev.CommentAppService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="com.odev.entities.User"%>
-<%@ page import="com.odev.UserAppService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.odev.UsersMessagesAppService"%>
+<%@page import="com.odev.entities.Users_Messages"%>
+<%@page import="com.odev.entities.Users_Comments"%>
+<%@page import="com.odev.entities.Users_CommentsListDto"%>
+<%@page import="com.odev.UsersCommentsAppService"%>
+
+<%@ page import="com.odev.entities.Users"%>
+<%@ page import="com.odev.UsersAppService"%>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.UUID"%>
@@ -17,24 +17,24 @@
 
 <%
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("tr"));
-	User user = null;
+	Users user = null;
 	String userId = request.getParameter("Id") != "" ? request.getParameter("Id") : "";
 	
-	UserAppService userAppService = new UserAppService();
+	UsersAppService userAppService = new UsersAppService();
 	user = userAppService.getUser(UUID.fromString(userId));
 	
-	User profile = new User();
+	Users profile = new Users();
 	Object sessionProfile = mySession.getAttribute("user");
-	if (sessionProfile instanceof User) {
-		profile = (User) sessionProfile;
+	if (sessionProfile instanceof Users) {
+		profile = (Users) sessionProfile;
 	}
 
 	//Comment List bu kısımda
 	int pageSize = 5;
 	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 	
-	CommentAppService commentAppService = new CommentAppService();
-	CommentListDto listCommentAndRowCount = commentAppService.getAllComments(UUID.fromString(userId), pageNo, pageSize);
+	UsersCommentsAppService commentAppService = new UsersCommentsAppService();
+	Users_CommentsListDto listCommentAndRowCount = commentAppService.getAllComments(UUID.fromString(userId), pageNo, pageSize);
 %>
 
 <!DOCTYPE html>
@@ -51,28 +51,28 @@
 		<a href="Users.jsp" class="user_back-button"> 
 			<i class="fa fa-arrow-left"></i>
 		</a>
-      	<% 
-      		if(profile.getRole().equals("Admin")) { 
-    	%>
+      	<%
+      	if(profile.getRole().equals("Admin")) {
+      	%>
 			<form action="DeleteUserServlet" method="POST">
-               <input type="hidden" name="id" value="<%= user.getId() %>">
+               <input type="hidden" name="id" value="<%=user.getId()%>">
                
                <button style="margin-left:5px" type="submit">KİŞİ SİL</button>
            </form>		
            
-           	<% 
-           		if(user.getRole().equals("User")) {
-        	%>
+           	<%
+		                      	if(user.getRole().equals("User")) {
+		                      	%>
 				<form action="UpdateUserServlet" method="POST">
-	               <input type="hidden" name="id" value="<%= user.getId() %>">
+	               <input type="hidden" name="id" value="<%=user.getId()%>">
 	               
 	               <button style="margin-left:5px" type="submit">ADMİN ROLÜNE AL</button>
 	           </form>
             <%
-           		}
+            }
             %>
-         <% 
-       		}
+         <%
+         }
          %>
 	</div>
 	<div class="user_layout">
@@ -138,20 +138,20 @@
 						<%
 						List<String> hobbies = user.getHobbies();
 
-						if (hobbies != null && !hobbies.isEmpty()) {
-							String hobbiesString = String.join(", ", hobbies); // Virgülle ayır
-							out.print("<span>" + hobbiesString + "</span>");
-						} else {
-							out.print("<span>Hobisi bulunmamaktadır.</span>");
-						}
+																		if (hobbies != null && !hobbies.isEmpty()) {
+																			String hobbiesString = String.join(", ", hobbies); // Virgülle ayır
+																			out.print("<span>" + hobbiesString + "</span>");
+																		} else {
+																			out.print("<span>Hobisi bulunmamaktadır.</span>");
+																		}
 						%>
 					</div>
 				</div>
 
 				<div class="user_comments-info">
 					<form action="InsertCommentServlet" method="POST" enctype="multipart/form-data">
-						<input type="hidden" id="userId" name="userId" value="<%= userId %>">
-						<input type="hidden" id="creatorId" name="creatorId" value="<%= profile.getId() %>">
+						<input type="hidden" id="userId" name="userId" value="<%=userId%>">
+						<input type="hidden" id="creatorId" name="creatorId" value="<%=profile.getId()%>">
 						<div>
 							<label for="type">Yorum Tipi:</label>
 						</div>
@@ -202,20 +202,20 @@
 							<div class="pageSizeRight" style="flex:5">
 								Sayfa : 
 								<%
-									int totalPages = (int) Math.ceil((double) listCommentAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
-									String currentUrl = request.getQueryString();
-									String baseUrl = "User.jsp";
-									
-									if (currentUrl != null && currentUrl.contains("pageNo")) {
-								        currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
-								    }
-								    if (currentUrl != null && !currentUrl.isEmpty()) {
-								        baseUrl += "?" + currentUrl;
-								    }
-								    
-									for (int i = 1; i <= totalPages; i++) {
-										if (i == pageNo) {
-										%>
+							int totalPages = (int) Math.ceil((double) listCommentAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
+																								String currentUrl = request.getQueryString();
+																								String baseUrl = "User.jsp";
+																								
+																								if (currentUrl != null && currentUrl.contains("pageNo")) {
+																							        currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
+																							    }
+																							    if (currentUrl != null && !currentUrl.isEmpty()) {
+																							        baseUrl += "?" + currentUrl;
+																							    }
+																							    
+																								for (int i = 1; i <= totalPages; i++) {
+																									if (i == pageNo) {
+							%>
 											<span><b class="current_page"><%=i%></b></span>
 										<%
 										} else {
@@ -223,38 +223,38 @@
 											<a class="page" href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
 										<%
 										}
-									}
-								%>
+																																	}
+										%>
 							</div>
 						</div>
 
 					    <%
-					    for (Comment comment : listCommentAndRowCount.getComments()) {
+					    for (Users_Comments comment : listCommentAndRowCount.getComments()) {
 					    %>
 					        <div class="comment-container">
 					            <div class="comment-header">
 					                <div class="comment-user">
-					                	<a href="User.jsp?Id=<%= comment.getCreatorId() %>" target="_blank">
-						                    <img class="comment-avatar" src="<%= comment.getCreatorPicture().length() > 0 ? comment.getCreatorPicture() : "./Images/default-profile.png" %>">
+					                	<a href="User.jsp?Id=<%=comment.getCreatorId()%>" target="_blank">
+						                    <img class="comment-avatar" src="<%=comment.getCreatorPicture().length() > 0 ? comment.getCreatorPicture() : "./Images/default-profile.png"%>">
 										</a>					                         
-										<a href="User.jsp?Id=<%= comment.getCreatorId() %>" target="_blank">
-					                    	<span class="comment-author"><%= comment.getCreatorName() %></span>
+										<a href="User.jsp?Id=<%=comment.getCreatorId()%>" target="_blank">
+					                    	<span class="comment-author"><%=comment.getCreatorName()%></span>
 					                    </a>
 					                </div>
-					                <span class="comment-date"><%= comment.getCreateTime().toLocalDateTime().format(formatter) %></span>
+					                <span class="comment-date"><%=comment.getCreateTime().toLocalDateTime().format(formatter)%></span>
 					                <span>
-					                	<% 
-					                		if(profile.getRole().equals("Admin")) { 
-				                		%>
+					                	<%
+					                	if(profile.getRole().equals("Admin")) {
+					                	%>
 											<form action="DeleteCommentServlet" method="POST">
-								                <input type="hidden" name="commentId" value="<%= comment.getId() %>">
-								                <input type="hidden" name="userId" value="<%= userId %>">
+								                <input type="hidden" name="commentId" value="<%=comment.getId()%>">
+								                <input type="hidden" name="userId" value="<%=userId%>">
 								                
 								                <button class="delete-button" type="submit">X</button>
 								            </form>		
-							            <% 
-					                		}
-							            %>			                
+							            <%
+									            }
+									            %>			                
 					                </span>
 					            </div>
 					
@@ -262,34 +262,34 @@
 					                <%
 					                if ("text".equals(comment.getType())) {
 					                %>
-					                    <p class="comment-text"><%= comment.getComment() %></p>
+					                    <p class="comment-text"><%=comment.getComment()%></p>
 					                <%
 					                } else if ("image".equals(comment.getType())) {
 					                %>
 					                    <div class="comment-media">
-					                    	<a href="<%= comment.getMedia() %>" target="_blank">
-					                        	<img src="<%= comment.getMedia() %>" alt="Resim" class="comment-image">
+					                    	<a href="<%=comment.getMedia()%>" target="_blank">
+					                        	<img src="<%=comment.getMedia()%>" alt="Resim" class="comment-image">
 					                        </a>
 					                    </div>
 					                    
-					                    <p class="comment-text"><%= comment.getComment() %></p>
+					                    <p class="comment-text"><%=comment.getComment()%></p>
 					                <%
 					                } else if ("video".equals(comment.getType())) {
 					                %>
 					                    <div class="comment-media">
-					                        <iframe width="100%" height="315" src="<%= comment.getMedia() %>" frameborder="0" allowfullscreen></iframe>
+					                        <iframe width="100%" height="315" src="<%=comment.getMedia()%>" frameborder="0" allowfullscreen></iframe>
 					                    </div>
 					                    
-					                    <p class="comment-text"><%= comment.getComment() %></p>
+					                    <p class="comment-text"><%=comment.getComment()%></p>
 					                <%
 					                }
 					                %>
 					            </div>
 					            
 								<form action="InsertMessagesServlet" method="POST">
-					                <input type="hidden" name="creatorId" value="<%= profile.getId() %>">
-					                <input type="hidden" name="commentId" value="<%= comment.getId() %>">
-					                <input type="hidden" name="userId" value="<%= userId %>">
+					                <input type="hidden" name="creatorId" value="<%=profile.getId()%>">
+					                <input type="hidden" name="commentId" value="<%=comment.getId()%>">
+					                <input type="hidden" name="userId" value="<%=userId%>">
 					                
 					                <input type="text" name="message" placeholder="Cevap yazınız..." required></input>
 					                
@@ -298,9 +298,9 @@
 
 								<div class="message-list">
 									<%
-									MessagesAppService messagesAppService = new MessagesAppService();
+									UsersMessagesAppService messagesAppService = new UsersMessagesAppService();
 
-									for (Messages message : messagesAppService.getAllMessages(comment.getId())) {
+																							for (Users_Messages message : messagesAppService.getAllMessages(comment.getId())) {
 									%>
 										<div class="message-container">
 											<div class="message-header">

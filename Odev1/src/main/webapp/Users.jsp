@@ -1,22 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="com.odev.UserAppService"%>
-<%@ page import="java.util.*, java.sql.*"%>
-<%@ page import="com.odev.entities.User"%>
-<%@ page import="com.odev.entities.UserListDto"%>
-
-
+<%@ page import="com.odev.UsersAppService"%>
+<%@ page import="java.util.*,java.sql.*"%>
+<%@ page import="com.odev.entities.Users"%>
+<%@ page import="com.odev.entities.Users_ListDto"%>
 <%@ include file="./IsCheckLogin.jsp"%>
 
 <%
-String searchName = request.getParameter("searchName") != null ? request.getParameter("searchName") : "";
-
-int pageSize = 5;
-int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
-
-UserAppService userAppService = new UserAppService();
-UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo, pageSize);
+	String searchName = request.getParameter("searchName") != null ? request.getParameter("searchName") : "";
+	
+	int pageSize = 5;
+	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
+	
+	UsersAppService userAppService = new UsersAppService();
+	Users_ListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo, pageSize);
 %>
 
 <!DOCTYPE html>
@@ -63,7 +60,7 @@ UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo,
 				</thead>
 				<tbody>
 					<%
-					for (User user : listUserAndRowCount.getUsers()) {
+					for (Users user : listUserAndRowCount.getUsers()) {
 					%>
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img

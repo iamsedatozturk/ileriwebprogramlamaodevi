@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import com.odev.entities.User;
+import com.odev.entities.Users;
 
 @SuppressWarnings("serial")
 @WebServlet("/UpdateProfileServlet")
@@ -76,7 +76,7 @@ public class ProfileServlet extends HttpServlet {
 			}
 		}
 
-		User user = new User();
+		Users user = new Users();
 		user.setId(UUID.fromString(id));
 		user.setEmail(email);
 		user.setName(name);
@@ -101,12 +101,12 @@ public class ProfileServlet extends HttpServlet {
 		else
 		{
 			Object sessionUser = mySession.getAttribute("user");
-			if (sessionUser instanceof User) {
-				user.setPicture(((User) sessionUser).getPicture());
+			if (sessionUser instanceof Users) {
+				user.setPicture(((Users) sessionUser).getPicture());
 			}
 		}
 
-		UserAppService userAppService = new UserAppService();
+		UsersAppService userAppService = new UsersAppService();
 		boolean isSave = userAppService.updateProfile(user);
 
 		if (isSave) {

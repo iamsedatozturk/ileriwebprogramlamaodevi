@@ -18,7 +18,7 @@ public class DeleteCommentServlet extends HttpServlet {
     	String commentId = request.getParameter("commentId");
     	String userId = request.getParameter("userId");
 
-        CommentAppService commentAppService = new CommentAppService();
+        UsersCommentsAppService commentAppService = new UsersCommentsAppService();
         boolean isSave = false;
         
 		isSave = commentAppService.deleteComment(UUID.fromString(commentId));

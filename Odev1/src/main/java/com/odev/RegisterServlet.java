@@ -1,6 +1,6 @@
 package com.odev;
 
-import com.odev.entities.User;
+import com.odev.entities.Users;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		}
 
-        User newUser = new User();
+        Users newUser = new Users();
         newUser.setId(id);
         newUser.setEmail(email);
         newUser.setName(name);
@@ -84,7 +84,7 @@ public class RegisterServlet extends HttpServlet {
         newUser.setPicture(picturePath);
         newUser.setHobbies(hobbies);
         
-        UserAppService userAppService = new UserAppService();
+        UsersAppService userAppService = new UsersAppService();
         boolean isRegistered = false;
         
 		try {

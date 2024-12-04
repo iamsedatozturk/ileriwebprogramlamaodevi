@@ -1,23 +1,22 @@
 package com.odev.entities;
 
 import java.util.List;
-import java.util.UUID;
 
-public class UserListDto {
-    private List<User> users;
+public class Users_ListDto {
+    private List<Users> users;
     private int rowCount;
     
-    public UserListDto(List<User> users, int rowCount) {
+    public Users_ListDto(List<Users> users, int rowCount) {
     	setUsers(users);
     	setRowCount(rowCount);
     }
     
     // Users
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<Users> users) {
         this.users = users;
     }
 

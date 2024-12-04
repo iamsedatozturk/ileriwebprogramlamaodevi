@@ -555,3 +555,22 @@ button:hover {
 	color: #fff;
 	background-color: #b24b4b;
 }
+
+
+.text-center {
+	text-align: center;
+}
+
+.forum {
+	margin-bottom: 5px;
+}
+
+.forum .title {
+	font-size: 14px;
+	color: Black;	
+}
+
+.forum .comment {
+	margin-top: 2px;
+	font-size: 11px;
+}

@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="com.odev.entities.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.odev.entities.Users"%>
 
 <%
 HttpSession mySession = request.getSession();
-User profile = new User();
+Users profile = new Users();
 
 Object sessionProfile = mySession.getAttribute("user");
-if (sessionProfile instanceof User) {
-	profile = (User) sessionProfile;
+if (sessionProfile instanceof Users) {
+	profile = (Users) sessionProfile;
 }
 
 if (profile.getName() == null) {
