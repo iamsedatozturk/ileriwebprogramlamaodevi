@@ -61,8 +61,8 @@
            </form>		
            
            	<%
-		                      	if(user.getRole().equals("User")) {
-		                      	%>
+           	if(user.getRole().equals("User")) {
+           	%>
 				<form action="UpdateUserServlet" method="POST">
 	               <input type="hidden" name="id" value="<%=user.getId()%>">
 	               
@@ -253,8 +253,8 @@
 								                <button class="delete-button" type="submit">X</button>
 								            </form>		
 							            <%
-									            }
-									            %>			                
+							            	}
+							            %>			                
 					                </span>
 					            </div>
 					

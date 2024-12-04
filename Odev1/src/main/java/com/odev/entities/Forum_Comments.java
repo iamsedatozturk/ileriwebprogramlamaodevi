@@ -15,6 +15,9 @@ public class Forum_Comments {
     private String creatorName;
     private String creatorPicture;
 
+    private String forumTitle;
+    private String forumComment;
+    
     // id
     public UUID getId() {
         return id;
@@ -73,13 +76,35 @@ public class Forum_Comments {
     }
 
  // creator Picture
-    public String getUserPicture() {
+    public String getCreatorPicture() {
         return creatorPicture;
     }
 
-    public void setUserPicture(UUID creatorId) throws ClassNotFoundException, SQLException {
+    public void setCreatorPicture(UUID creatorId) throws ClassNotFoundException, SQLException {
     	UsersAppService userAppService = new UsersAppService();
     	
         this.creatorPicture =  userAppService.getUser(creatorId).getPicture();
+    }
+    
+ // Forum Title
+    public String getForumTitle() {
+        return forumTitle;
+    }
+
+    public void setForumTitle(UUID forumId) throws ClassNotFoundException, SQLException {
+    	ForumAppService forumAppService = new ForumAppService();
+    	
+        this.forumTitle =  forumAppService.getForum(forumId).getTitle();
+    }
+    
+// Forum Comment
+    public String getForumComment() {
+        return forumComment;
+    }
+
+    public void setForumComment(UUID forumId) throws ClassNotFoundException, SQLException {
+    	ForumAppService forumAppService = new ForumAppService();
+    	
+        this.forumComment =  forumAppService.getForum(forumId).getComment();
     }
 }

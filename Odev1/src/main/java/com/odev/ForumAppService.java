@@ -50,6 +50,34 @@ public class ForumAppService {
 		}
 	}
 	
+	public Forum getForum(UUID id) throws SQLException, ClassNotFoundException {
+		Forum forum = null;
+
+		String query = "SELECT * FROM public.\"Forum\" WHERE \"Id\" = ? ";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+
+			statement.setObject(1, id, java.sql.Types.OTHER);
+			
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					forum = new Forum();
+					
+					forum.setId(resultSet.getString("Id") == null ? null : UUID.fromString(resultSet.getString("Id")));
+					forum.setUserId(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
+					forum.setCreateTime(resultSet.getTimestamp("CreateTime") == null ? null : resultSet.getTimestamp("CreateTime"));
+					forum.setTitle(resultSet.getString("Title") == null ? "" : resultSet.getString("Title"));
+					forum.setComment(resultSet.getString("Comment") == null ? "" : resultSet.getString("Comment"));
+					forum.setUserName(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
+					forum.setUserPicture(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
+				}
+			}
+		}
+
+		return forum;
+	}
+	
 	public Forum_ListDto getAllForums(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<Forum> forums = new ArrayList<>();
 		int i = 0;

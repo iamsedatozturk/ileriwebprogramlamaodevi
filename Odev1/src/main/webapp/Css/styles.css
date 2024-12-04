@@ -67,6 +67,7 @@ table {
 	font-size: 12px;
 	font-family: Arial, sans-serif;
 	text-align: left;
+	margin-top: 5px;
 }
 
 th, td {
@@ -548,6 +549,7 @@ button:hover {
 	border-radius: 15px;
 	padding: 2px 5px;
 	background-color: #b24b4b;
+	width: 20px;
 }
 
 .delete-user {
@@ -571,7 +573,16 @@ button:hover {
 
 .newforum {
 	margin-bottom: 5px;
-	border: 1px solid gray;
+	border: 1px solid #ededed;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+.forumdetay {
+	background: #d3e5f9;
+	margin-bottom: 5px;
+	border: 1px solid #ededed;
+	border-radius: 4px;
 	padding: 5px;
 }
 
