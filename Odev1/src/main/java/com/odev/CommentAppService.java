@@ -34,6 +34,22 @@ public class CommentAppService {
 		}
 	}
 	
+	public boolean deleteComment(UUID commentId) {
+		String query = "DELETE FROM public.\"Comment\" WHERE \"Id\" = ?";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+			preparedStatement.setObject(1, commentId);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			return rowsAffected > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public CommentListDto getAllComments(UUID UserId, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<Comment> comments = new ArrayList<>();
 		

@@ -30,7 +30,7 @@
 	}
 
 	//Comment List bu kısımda
-	int pageSize = 100;
+	int pageSize = 5;
 	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 	
 	CommentAppService commentAppService = new CommentAppService();
@@ -48,18 +48,39 @@
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="toolbar">
-		<a href="Users.jsp" class="user_back-button"> <i
-			class="fa fa-arrow-left"></i>
+		<a href="Users.jsp" class="user_back-button"> 
+			<i class="fa fa-arrow-left"></i>
 		</a>
+      	<% 
+      		if(profile.getRole().equals("Admin")) { 
+    	%>
+			<form action="DeleteUserServlet" method="POST">
+               <input type="hidden" name="id" value="<%= user.getId() %>">
+               
+               <button style="margin-left:5px" type="submit">KİŞİ SİL</button>
+           </form>		
+           
+           	<% 
+           		if(user.getRole().equals("User")) {
+        	%>
+				<form action="UpdateUserServlet" method="POST">
+	               <input type="hidden" name="id" value="<%= user.getId() %>">
+	               
+	               <button style="margin-left:5px" type="submit">ADMİN ROLÜNE AL</button>
+	           </form>
+            <%
+           		}
+            %>
+         <% 
+       		}
+         %>
 	</div>
 	<div class="user_layout">
 		<main class="user_content">
 			<div class="profile-section">
 				<div class="profile-image-container">
 					<div>
-						<img
-							src="<%=user.getPicture().length() > 0 ? user.getPicture() : "./Images/default-profile.png"%>"
-							alt="Profil Resmi" class="profile-image" />
+						<img src="<%=user.getPicture().length() > 0 ? user.getPicture() : "./Images/default-profile.png"%>" class="user-image" />
 					</div>
 				</div>
 
@@ -128,7 +149,7 @@
 				</div>
 
 				<div class="user_comments-info">
-					<form action="CommentServlet" method="POST" enctype="multipart/form-data">
+					<form action="InsertCommentServlet" method="POST" enctype="multipart/form-data">
 						<input type="hidden" id="userId" name="userId" value="<%= userId %>">
 						<input type="hidden" id="creatorId" name="creatorId" value="<%= profile.getId() %>">
 						<div>
@@ -154,12 +175,12 @@
 				
 				        <div id="videoComment" style="display:none;">
 							<input type="text" id="video" name="video"
-								placeholder="YouTube Video Linki" style="width: 100%">
+								placeholder="YouTube Video Linki" style="width: 95%">
 						</div>
 				
-			            <textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:95%" required></textarea>
+			            <textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:98%" required></textarea>
 				
-				        <button type="submit" style="width: 140px">Yorum Gönder</button>
+				        <button type="submit" style="width: 100%">Yorum Gönder</button>
 				    </form>
 				
 				    <script>
@@ -176,17 +197,65 @@
 				    </script>
 				
 					<div class="user_comments-list">
+						<div class="paging" style="display:flex;">
+							<div class="pageSizeLeft" style=" flex:2">Toplam Kayıt: <b><%=listCommentAndRowCount.getRowCount()%></b></div>
+							<div class="pageSizeRight" style="flex:5">
+								Sayfa : 
+								<%
+									int totalPages = (int) Math.ceil((double) listCommentAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
+									String currentUrl = request.getQueryString();
+									String baseUrl = "User.jsp";
+									
+									if (currentUrl != null && currentUrl.contains("pageNo")) {
+								        currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
+								    }
+								    if (currentUrl != null && !currentUrl.isEmpty()) {
+								        baseUrl += "?" + currentUrl;
+								    }
+								    
+									for (int i = 1; i <= totalPages; i++) {
+										if (i == pageNo) {
+										%>
+											<span><b class="current_page"><%=i%></b></span>
+										<%
+										} else {
+										%>
+											<a class="page" href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
+										<%
+										}
+									}
+								%>
+							</div>
+						</div>
+
 					    <%
 					    for (Comment comment : listCommentAndRowCount.getComments()) {
 					    %>
 					        <div class="comment-container">
 					            <div class="comment-header">
 					                <div class="comment-user">
-					                    <img src="<%= comment.getCreatorPicture().length() > 0 ? comment.getCreatorPicture() : "./Images/default-profile.png" %>"
-					                         alt="<%= comment.getCreatorName() %>'in Profil Fotoğrafı" class="comment-avatar">
-					                    <span class="comment-author"><%= comment.getCreatorName() %></span>
+					                	<a href="User.jsp?Id=<%= comment.getCreatorId() %>" target="_blank">
+						                    <img class="comment-avatar" src="<%= comment.getCreatorPicture().length() > 0 ? comment.getCreatorPicture() : "./Images/default-profile.png" %>">
+										</a>					                         
+										<a href="User.jsp?Id=<%= comment.getCreatorId() %>" target="_blank">
+					                    	<span class="comment-author"><%= comment.getCreatorName() %></span>
+					                    </a>
 					                </div>
 					                <span class="comment-date"><%= comment.getCreateTime().toLocalDateTime().format(formatter) %></span>
+					                <span>
+					                	<% 
+					                		if(profile.getRole().equals("Admin")) { 
+				                		%>
+											<form action="DeleteCommentServlet" method="POST">
+								                <input type="hidden" name="commentId" value="<%= comment.getId() %>">
+								                <input type="hidden" name="userId" value="<%= userId %>">
+								                
+								                <button class="delete-button" type="submit">X</button>
+								            </form>		
+							            <% 
+					                		}
+							            %>			                
+					                </span>
 					            </div>
 					
 					            <div class="comment-body">
@@ -198,7 +267,9 @@
 					                } else if ("image".equals(comment.getType())) {
 					                %>
 					                    <div class="comment-media">
-					                        <img src="<%= comment.getMedia() %>" alt="Resim" class="comment-image">
+					                    	<a href="<%= comment.getMedia() %>" target="_blank">
+					                        	<img src="<%= comment.getMedia() %>" alt="Resim" class="comment-image">
+					                        </a>
 					                    </div>
 					                    
 					                    <p class="comment-text"><%= comment.getComment() %></p>
@@ -215,14 +286,14 @@
 					                %>
 					            </div>
 					            
-								<form action="MessagesServlet" method="POST">
+								<form action="InsertMessagesServlet" method="POST">
 					                <input type="hidden" name="creatorId" value="<%= profile.getId() %>">
 					                <input type="hidden" name="commentId" value="<%= comment.getId() %>">
 					                <input type="hidden" name="userId" value="<%= userId %>">
 					                
-					                <input type="text" name="message" placeholder="Yeni yorumunuzu buraya yazın..." required></input>
+					                <input type="text" name="message" placeholder="Cevap yazınız..." required></input>
 					                
-					                <button type="submit">Yorum Gönder</button>
+					                <button type="submit">Cevap Gönder</button>
 					            </form>
 
 								<div class="message-list">
@@ -233,12 +304,31 @@
 									%>
 										<div class="message-container">
 											<div class="message-header">
-												<img src="<%= message.getCreatorPicture().length() > 0 ? message.getCreatorPicture() : "./Images/default-profile.png" %>" 
-													 alt="Resim" class="message-avatar">
-												<span class="message-sender"><%= message.getCreatorName() %></span>
+							                	<a href="User.jsp?Id=<%= message.getCreatorId() %>" target="_blank">
+													<img class="message-avatar" src="<%= message.getCreatorPicture().length() > 0 ? message.getCreatorPicture() : "./Images/default-profile.png" %>">
+												</a>
+							                	<a href="User.jsp?Id=<%= message.getCreatorId() %>" target="_blank">
+													<span class="message-sender"><%= message.getCreatorName() %></span>
+												</a>
 												<span class="message-time"><%= message.getCreateTime().toLocalDateTime().format(formatter) %></span>
 											</div>
-											<p class="message-text"><%= message.getMessage() %></p>
+					
+											<div class="message-header">						
+												<p class="message-text"><%= message.getMessage() %></p>
+												
+												<% 
+							                		if(profile.getRole().equals("Admin")) { 
+						                		%>
+													<form action="DeleteMessagesServlet" method="POST">
+										                <input type="hidden" name="messageId" value="<%= message.getId() %>">
+										                <input type="hidden" name="userId" value="<%= userId %>">
+										                
+										                <button class="delete-button" type="submit">X</button>
+										            </form>
+									            <% 
+							                		} 
+						                		%>
+								            </div>					                
 										</div>
 									<%
 									}

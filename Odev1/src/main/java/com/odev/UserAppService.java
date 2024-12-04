@@ -284,4 +284,38 @@ public class UserAppService {
 			return false;
 		}
 	}
+	
+	public boolean updateAdminRoleAl(UUID id) {
+		String query = "UPDATE public.\"Users\" SET \"Role\" = ? WHERE \"Id\" = ?";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+			preparedStatement.setObject(1, "Admin");
+			preparedStatement.setObject(2, id, java.sql.Types.OTHER);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			return rowsAffected > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean deleteUser(UUID id) {
+		String query = "DELETE FROM public.\"Users\" WHERE \"Id\" = ?";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+			preparedStatement.setObject(1, id);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			return rowsAffected > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

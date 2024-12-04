@@ -53,9 +53,12 @@ UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo,
 						<th>EMAİL</th>
 						<th>CİNSİYET</th>
 						<th>ŞEHİR</th>
+						<th>ADRES</th>
 						<th>TELEFON</th>
 						<th>OKUL ADI</th>
 						<th>İŞ</th>
+						<th>FACEBOOK</th>
+						<th>TWİTTER</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,9 +73,12 @@ UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo,
 						<td><%=user.getEmail()%></td>
 						<td><%=user.getGender() == 0 ? "Erkek" : "Kadın"%></td>
 						<td><%=user.getCity()%></td>
+						<td><%=user.getAddress()%></td>
 						<td><%=user.getPhone()%></td>
 						<td><%=user.getSchoolName()%></td>
 						<td><%=user.getBusiness()%></td>
+						<td><%=user.getFacebookName()%></td>
+						<td><%=user.getTwitterName()%></td>
 					</tr>
 					<%
 					}
@@ -80,9 +86,10 @@ UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo,
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="1" class="pageSizeLeft">Toplam Kayıt:<b><%=listUserAndRowCount.getRowCount()%></b></td>
-						<td colspan="7" class="pageSizeRight">
-							<div>Sayfa : 
+						<td colspan="1" class="pageSizeLeft">Toplam Kayıt: <b><%=listUserAndRowCount.getRowCount()%></b></td>
+						<td colspan="10" class="pageSizeRight">
+							<div>
+								Sayfa : 
 								<%
 								int totalPages = (int) Math.ceil((double) listUserAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
 								String currentUrl = request.getQueryString();
@@ -98,11 +105,11 @@ UserListDto listUserAndRowCount = userAppService.getAllUsers(searchName, pageNo,
 								for (int i = 1; i <= totalPages; i++) {
 									if (i == pageNo) {
 									%>
-										<span><b><%=i%></b></span>
+										<span><b class="current_page"><%=i%></b></span>
 									<%
 									} else {
 									%>
-										<a href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
+										<a class="page" href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
 									<%
 									}
 									}

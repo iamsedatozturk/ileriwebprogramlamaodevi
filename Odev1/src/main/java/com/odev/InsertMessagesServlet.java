@@ -1,18 +1,16 @@
 package com.odev;
 
-import com.odev.entities.Comment;
 import com.odev.entities.Messages;
 
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.util.*;
 
 @SuppressWarnings("serial")
-@WebServlet("/MessagesServlet")
-public class MessagesServlet extends HttpServlet {
+@WebServlet("/InsertMessagesServlet")
+public class InsertMessagesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	UUID id = UUID.randomUUID();

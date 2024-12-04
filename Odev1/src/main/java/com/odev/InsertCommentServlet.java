@@ -9,12 +9,12 @@ import jakarta.servlet.http.*;
 import java.util.*;
 
 @SuppressWarnings("serial")
-@WebServlet("/CommentServlet")
+@WebServlet("/InsertCommentServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 			maxFileSize = 1024 * 1024 * 10, // 10MB
 			maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-public class CommentServlet extends HttpServlet {
+public class InsertCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String UPLOAD_DIR = "Uploads";
     	

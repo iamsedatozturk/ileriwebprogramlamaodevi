@@ -164,7 +164,7 @@ header .user-info a {
 
 .toolbar {
 	background-color: #7ba7d6;
-	height: 40px;
+	height: 39px;
 	display: flex;
 }
 
@@ -237,15 +237,15 @@ label {
 }
 
 input, select, textarea {
-	margin-bottom: 10px;
-	padding: 8px;
-	font-size: 16px;
+	margin-bottom: 5px;
+	padding: 4px;
+	font-size: 14px;
 }
 
 button {
 	padding: 10px;
 	font-size: 16px;
-	background-color: #007BFF;
+	background-color: #689acf;
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -311,7 +311,7 @@ button:hover {
 }
 
 .profile-image-container {
-	flex: 1;
+	flex: 2;
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-around;
@@ -331,6 +331,13 @@ button:hover {
 	gap: 10px;
 }
 
+.user-image {
+	width: 215px;
+	height: 215px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
 .user_info label {
 	font-weight: bold;
 }
@@ -343,6 +350,7 @@ button:hover {
 	text-decoration: none;
 	display: inline-flex;
 	align-items: flex-start;
+	margin-left: 3px;
 }
 
 .user_back-button i {
@@ -350,7 +358,7 @@ button:hover {
 }
 
 .user_comments-info {
-	flex: 2;
+	flex: 3;
 	background-color: #f9f9f9;
 	padding: 20px;
 	border-radius: 8px;
@@ -364,7 +372,6 @@ button:hover {
 }
 
 .user_comments-list {
-    margin-top: 20px;
     padding: 0;
     list-style-type: none;
 }
@@ -372,8 +379,8 @@ button:hover {
 .comment-container {
     background-color: #f9f9f9;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -449,9 +456,9 @@ button:hover {
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 8px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
@@ -494,6 +501,7 @@ button:hover {
     word-wrap: break-word;
     word-break: break-word;
     margin-top: 10px;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -514,3 +522,36 @@ button:hover {
     }
 }
 
+.paging {
+   margin-top: 20px;
+   margin-bottom: 5px;
+}
+
+.current_page {
+	font-weight: 500;
+	background-color: #03a9f4;
+	color: #fff;
+	border-radius: 15px;
+	padding: 2px 5px;
+}
+
+.page {
+	font-weight: 500;
+	border-radius: 15px;
+	padding: 1px;
+}
+
+.delete-button {
+	font-weight: 500;
+	background-color: #03a9f4;
+	color: #fff;
+	border-radius: 15px;
+	padding: 2px 5px;
+	background-color: #b24b4b;
+}
+
+.delete-user {
+	font-weight: 500;
+	color: #fff;
+	background-color: #b24b4b;
+}

@@ -29,6 +29,22 @@ public class MessagesAppService {
 		}
 	}
 	
+	public boolean deleteMessage(UUID messageId) {
+		String query = "DELETE FROM public.\"Messages\" WHERE \"Id\" = ?";
+
+		try (Connection connection = DatabaseConnection.connect();
+				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+			preparedStatement.setObject(1, messageId);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			return rowsAffected > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public List<Messages> getAllMessages(UUID CommentId) throws SQLException, ClassNotFoundException {
 		List<Messages> messages = new ArrayList<>();
 		
