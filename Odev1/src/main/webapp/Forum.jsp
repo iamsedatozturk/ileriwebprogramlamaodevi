@@ -47,7 +47,7 @@
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="toolbar">
-		<a href="MainPage.jsp" class="user_back-button"> <i
+		<a href="Forums.jsp" class="user_back-button"> <i
 			class="fa fa-arrow-left"></i>
 		</a>
 	</div>
