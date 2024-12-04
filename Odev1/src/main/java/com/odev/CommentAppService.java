@@ -13,7 +13,7 @@ import com.odev.entities.User;
 
 public class CommentAppService {
 	public boolean insertComment(Comment comment) {
-        String query = "INSERT INTO public.\"Comment\" (\"Id\", \"UserId\", \"Type\", \"Media\", \"CreatorId\", \"Comment\") " +
+        String query = "INSERT INTO public.\"Users_Comments\" (\"Id\", \"UserId\", \"Type\", \"Media\", \"CreatorId\", \"Comment\") " +
         		"VALUES (?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = DatabaseConnection.connect();
@@ -35,7 +35,7 @@ public class CommentAppService {
 	}
 	
 	public boolean deleteComment(UUID commentId) {
-		String query = "DELETE FROM public.\"Comment\" WHERE \"Id\" = ?";
+		String query = "DELETE FROM public.\"Users_Comments\" WHERE \"Id\" = ?";
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -53,7 +53,7 @@ public class CommentAppService {
 	public CommentListDto getAllComments(UUID UserId, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<Comment> comments = new ArrayList<>();
 		
-		String query = "SELECT * FROM public.\"Comment\" WHERE \"UserId\" = ? ORDER BY \"CreateTime\" DESC LIMIT ? OFFSET ?";
+		String query = "SELECT * FROM public.\"Users_Comments\" WHERE \"UserId\" = ? ORDER BY \"CreateTime\" DESC LIMIT ? OFFSET ?";
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
@@ -87,7 +87,7 @@ public class CommentAppService {
 	}
 	
 	public int getTotalComments(UUID UserId) throws SQLException, ClassNotFoundException{
-		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Comment\" WHERE \"UserId\" = ?";
+		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Users_Comments\" WHERE \"UserId\" = ?";
 
 	    try (Connection connection = DatabaseConnection.connect();
     		PreparedStatement statement = connection.prepareStatement(query)) {

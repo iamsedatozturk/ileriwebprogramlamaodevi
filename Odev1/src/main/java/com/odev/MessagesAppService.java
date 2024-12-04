@@ -10,7 +10,7 @@ import com.odev.entities.Messages;
 
 public class MessagesAppService {
 	public boolean insertMessage(Messages messages) {
-        String query = "INSERT INTO public.\"Messages\" (\"Id\", \"CommentId\", \"CreatorId\", \"Message\") " +
+        String query = "INSERT INTO public.\"Users_Messages\" (\"Id\", \"CommentId\", \"CreatorId\", \"Message\") " +
         		"VALUES (?, ?, ?, ?)";
 
 		try (Connection connection = DatabaseConnection.connect();
@@ -30,7 +30,7 @@ public class MessagesAppService {
 	}
 	
 	public boolean deleteMessage(UUID messageId) {
-		String query = "DELETE FROM public.\"Messages\" WHERE \"Id\" = ?";
+		String query = "DELETE FROM public.\"Users_Messages\" WHERE \"Id\" = ?";
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -48,7 +48,7 @@ public class MessagesAppService {
 	public List<Messages> getAllMessages(UUID CommentId) throws SQLException, ClassNotFoundException {
 		List<Messages> messages = new ArrayList<>();
 		
-		String query = "SELECT * FROM public.\"Messages\" WHERE \"CommentId\" = ? ORDER BY \"CreateTime\" ";
+		String query = "SELECT * FROM public.\"Users_Messages\" WHERE \"CommentId\" = ? ORDER BY \"CreateTime\" ";
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
