@@ -57,7 +57,7 @@
 				<div class="title">
 					<b><%=forum.getTitle()%></b>
 				</div>
-				<div class="comment"><%=forum.getComment()%></div>
+				<div class="comment-small"><%=forum.getComment()%></div>
 			</div>
 			
 			<label for="title">Yeni Cevap</label> 

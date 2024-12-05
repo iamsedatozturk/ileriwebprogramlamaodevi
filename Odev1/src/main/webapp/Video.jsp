@@ -57,7 +57,16 @@
 				<div class="title">
 					<b><%=forum.getTitle()%></b>
 				</div>
-				<div class="comment"><%=forum.getComment()%></div>
+				<div class="comment-small"><%=forum.getComment()%></div>
+				
+				<% 
+					List<String> mediaList = forum.getMedias();
+
+					if (mediaList != null) { 
+						for (String media : mediaList) {
+						%>
+					        <iframe style="margin-top:10px" width="100" height="70" src="<%=media %>" frameborder="0" allowfullscreen></iframe>
+						<% } } %>
 			</div>
 			
 			<label for="title">Yeni Cevap</label> 

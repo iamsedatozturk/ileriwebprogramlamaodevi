@@ -56,7 +56,18 @@
 				<div class="title">
 					<b><%=forum.getTitle()%></b>
 				</div>
-				<div class="comment"><%=forum.getComment()%></div>
+				<div class=comment-small><%=forum.getComment()%></div>
+				
+				<% 
+					List<String> mediaList = forum.getMedias();
+
+					if (mediaList != null) { 
+						for (String media : mediaList) {
+						%>
+							<a href="<%=media%>" target="_blank">
+			                    <img class="forum-image-small" src="<%=media%>">
+							</a>
+						<% } } %>			
 			</div>
 			
 			<label for="title">Yeni Cevap</label> 

@@ -596,6 +596,17 @@ button:hover {
 	padding: 5px;
 }
 
+.forumdetay .title {
+	font-size: 14px;
+	color: #2577b1;
+	text-decoration: underline;
+}
+
+.forumdetay .comment-small {
+	margin-top: 2px;
+	font-size: 12px;
+}
+
 .forum {
 	margin-bottom: 5px;
 	padding: 5px;
@@ -604,7 +615,7 @@ button:hover {
 .forum .title {
 	font-size: 14px;
 	color: #2577b1;
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 .forum .comment {
@@ -612,8 +623,19 @@ button:hover {
 	font-size: 12px;
 }
 
+.forum .comment-small {
+	margin-top: 2px;
+	font-size: 9px;
+}
+
 .forum-image {
 	width: 215px;
 	height: 215px;
+	object-fit: cover;
+}
+
+.forum-image-small {
+	width: 115px;
+	height: 115px;
 	object-fit: cover;
 }
