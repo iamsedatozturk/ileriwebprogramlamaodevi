@@ -2,16 +2,12 @@ package com.odev;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
-import com.odev.entities.Users_Comments;
-import com.odev.entities.Users_CommentsListDto;
 import com.odev.entities.Forum;
 import com.odev.entities.Forum_ListDto;
-import com.odev.entities.Users;
 
 public class ForumAppService {
 	public boolean insertForum(Forum forum) {
@@ -78,11 +74,11 @@ public class ForumAppService {
 		return forum;
 	}
 	
-	public Forum_ListDto getAllForums(String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
+	public Forum_ListDto getAllForums(String type, String searchName, int page, int pageSize) throws SQLException, ClassNotFoundException {
 		List<Forum> forums = new ArrayList<>();
-		int i = 0;
+		int i = 1;
 		
-		String query = "SELECT * FROM public.\"Forum\" WHERE 1=1";
+		String query = "SELECT * FROM public.\"Forum\" WHERE \"Type\" = ?";
 
 		if (searchName != null && !searchName.isEmpty()) {
 	        query += " AND LOWER(\"Comment\") LIKE LOWER(?)";
@@ -93,6 +89,8 @@ public class ForumAppService {
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
 
+				statement.setString(1, type);
+			
 				if (searchName != null && !searchName.isEmpty()) {
 					i++;
 					statement.setString(i, "%" + searchName + "%");

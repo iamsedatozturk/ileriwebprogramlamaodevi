@@ -24,7 +24,7 @@
 	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 	
 	ForumAppService forumAppService = new ForumAppService();
-	Forum_ListDto listForumAndRowCount = forumAppService.getAllForums(searchName, pageNo, pageSize);
+	Forum_ListDto listForumAndRowCount = forumAppService.getAllForums("text", searchName, pageNo, pageSize);
 %>
 
 <!DOCTYPE html>
