@@ -83,7 +83,7 @@
 				<button id="zoominbtn" class="zoom-in" style="margin-left: 5px">Zoom+</button>
 				<button id="zoomoutbtn" class="zoom-out" style="margin-left: 5px">Zoom-</button>
 				<button id="restbtn" class="reset" style="margin-left: 5px">Default Zoom</button>
-				<button id="zoomLoca" style="color:red; margin-left: 5px" onclick="zoomToLocation()">İstanbul</button>
+				<button id="zoomLoca" style="color:#003f7f; margin-left: 5px" onclick="zoomToLocation()"><b>İstanbul</b></button>
 			</div>
 
 			<div class="parent"

@@ -62,6 +62,9 @@
 				</form>
 			</div>
 			
+			<% 
+				if(listForumAndRowCount.getRowCount() > 0) {
+			%>
 			<form action="Videos.jsp" method="get">
 				<div>
 					<input type="text" id="searchName" name="searchName" placeholder="Filtre" value="<%=searchName%>">
@@ -69,7 +72,10 @@
 					<button class="filter-button" type="submit">Uygula</button>
 				</div>
 			</form>
-
+			<%
+				}
+			%>
+			
 			<table border="1">
 				<tbody>
 					<%

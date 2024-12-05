@@ -657,3 +657,15 @@ button:hover {
 	width: 1100px;
 	height: 600px;
 }
+
+.main-page-info {
+	text-align: center;
+}
+
+
+.main-page-baslik {
+	display: block;
+	text-decoration: none;
+	padding: 10px 15px;
+	color: white;
+}

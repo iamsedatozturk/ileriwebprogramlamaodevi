@@ -12,7 +12,9 @@ if (sessionUser instanceof Users) {
 }
 %>
 <header>
-	<div class="title">Mezunlar Platformu</div>
+	<a class="title main-page-baslik" href="./MainPage.jsp" class="menu-item menu-item-left">
+		Mezunlar Platformu
+	</a>
 
 	<nav>
 		<ul>
