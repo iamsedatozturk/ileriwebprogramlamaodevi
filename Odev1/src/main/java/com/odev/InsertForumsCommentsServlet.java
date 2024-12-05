@@ -1,6 +1,5 @@
 package com.odev;
 
-import com.odev.entities.Forum;
 import com.odev.entities.Forum_Comments;
 
 import java.io.*;
@@ -17,6 +16,7 @@ public class InsertForumsCommentsServlet extends HttpServlet {
         String forumId = request.getParameter("forumId");
         String creatorId = request.getParameter("creatorId");
         String message = request.getParameter("message");
+        String type = request.getParameter("type");
 
         Forum_Comments newForumComment = new Forum_Comments();
         newForumComment.setId(id);
@@ -30,7 +30,12 @@ public class InsertForumsCommentsServlet extends HttpServlet {
 		isSave = forumCommentsAppService.insertComment(newForumComment);
 
         if (isSave) {
-            response.sendRedirect("Forum.jsp?Id=" + forumId);
+        	if ("text".contains(type))
+        		response.sendRedirect("Forum.jsp?Id=" + forumId);
+        	else if ("video".contains(type))
+        		response.sendRedirect("Video.jsp?Id=" + forumId);
+        	else if ("image".contains(type))
+        		response.sendRedirect("Image.jsp?Id=" + forumId);        	
         } else {
         	response.sendRedirect("Error.jsp");
         }

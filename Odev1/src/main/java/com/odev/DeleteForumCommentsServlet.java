@@ -13,6 +13,7 @@ public class DeleteForumCommentsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String id = request.getParameter("Id");
     	String forumId = request.getParameter("forumId");
+        String type = request.getParameter("type");
 
     	ForumCommentsAppService forumCommentsAppService = new ForumCommentsAppService();
         boolean isSave = false;
@@ -20,7 +21,12 @@ public class DeleteForumCommentsServlet extends HttpServlet {
 		isSave = forumCommentsAppService.deleteMessage(UUID.fromString(id));
 
         if (isSave) {
-            response.sendRedirect("Forum.jsp?Id=" + forumId);
+        	if ("text".contains(type))
+        		response.sendRedirect("Forum.jsp?Id=" + forumId);
+        	else if ("video".contains(type))
+        		response.sendRedirect("Video.jsp?Id=" + forumId);
+        	else if ("image".contains(type))
+        		response.sendRedirect("Image.jsp?Id=" + forumId);        	
         } else {
         	response.sendRedirect("Error.jsp");
         }

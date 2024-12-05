@@ -110,6 +110,7 @@
 								<div class="text-center">
 									<form action="DeleteForumServlet" method="POST">
 						                <input type="hidden" name="Id" value="<%=forum.getId()%>">
+						                <input type="hidden" id="type" name="type" value="video" />
 						                
 						                <button class="delete-button" type="submit">X</button>
 						            </form>		
@@ -134,7 +135,7 @@
 								<%
 							int totalPages = (int) Math.ceil((double) listForumAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
 							String currentUrl = request.getQueryString();
-							String baseUrl = "Forums.jsp";
+							String baseUrl = "Videos.jsp";
 
 							if (currentUrl != null && currentUrl.contains("pageNo")) {
 								currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");

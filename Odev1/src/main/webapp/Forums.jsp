@@ -102,6 +102,7 @@
 				                	%>
 										<form action="DeleteForumServlet" method="POST">
 							                <input type="hidden" name="Id" value="<%=forum.getId()%>">
+							                <input type="hidden" id="type" name="type" value="text" />
 							                
 							                <button class="delete-button" type="submit">X</button>
 							            </form>		

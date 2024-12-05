@@ -64,6 +64,7 @@
 			<form action="InsertForumsCommentsServlet" method="POST">
 				<input type="hidden" id="forumId" name="forumId" value="<%=forumId%>" />
 				<input type="hidden" id="creatorId" name="creatorId" value="<%=profile.getId()%>" />
+				<input type="hidden" id="type" name="type" value="video" />
 				
 				<textarea id="message" name="message" placeholder="Cevabınız" rows="4" cols="50" autofocus required></textarea>
 				
@@ -102,6 +103,7 @@
 										<form action="DeleteForumCommentsServlet" method="POST">
 							                <input type="hidden" name="Id" value="<%=comments.getId()%>">
 							                <input type="hidden" name="forumId" value="<%=forumId%>">
+											<input type="hidden" id="type" name="type" value="text" />
 							                
 							                <button class="delete-button" type="submit">X</button>
 							            </form>		
@@ -126,7 +128,7 @@
 								<%
 							int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
 							String currentUrl = request.getQueryString();
-							String baseUrl = "Forums.jsp";
+							String baseUrl = "Video.jsp";
 
 							if (currentUrl != null && currentUrl.contains("pageNo")) {
 								currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");

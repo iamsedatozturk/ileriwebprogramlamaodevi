@@ -39,11 +39,11 @@ public class InsertForumsServlet extends HttpServlet {
 		isSave = forumAppService.insertForum(newForum);
 
         if (isSave) {
-        	if (type == "text")
+        	if ("text".contains(type))
         		response.sendRedirect("Forums.jsp");
-        	else if (type == "video")
+        	else if ("video".contains(type))
         		response.sendRedirect("Videos.jsp");
-        	else if (type == "image")
+        	else if ("image".contains(type))
         		response.sendRedirect("Images.jsp");
         } else {
         	response.sendRedirect("Error.jsp");
