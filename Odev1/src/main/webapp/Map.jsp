@@ -42,8 +42,35 @@
 	        } else {
 	        	$section.find(".zoom-in").click();
 	        }
-	    });
+	    });	    
 	});
+	
+	function zoomToLocation() {
+        var istanbulX = -1200;  
+        var istanbulY = -800;  
+
+		var $section = $('#harita_content');
+		var $panzoomElement = $section.find('.panzoom');
+		
+		$panzoomElement.panzoom("reset");
+				
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$section.find(".zoom-in").click();
+		$panzoomElement.panzoom("pan", -istanbulX, -istanbulY, { animate: true });
+    }
 </script>
 </head>
 <body>
@@ -55,8 +82,8 @@
 					style="margin-left: 5px"><i class="fa fa-arrow-left"></i></a>
 				<button id="zoominbtn" class="zoom-in" style="margin-left: 5px">Zoom+</button>
 				<button id="zoomoutbtn" class="zoom-out" style="margin-left: 5px">Zoom-</button>
-				<button id="restbtn" class="reset" style="margin-left: 5px">Default
-					Zoom</button>
+				<button id="restbtn" class="reset" style="margin-left: 5px">Default Zoom</button>
+				<button id="zoomLoca" style="color:red; margin-left: 5px" onclick="zoomToLocation()">İstanbul</button>
 			</div>
 
 			<div class="parent"

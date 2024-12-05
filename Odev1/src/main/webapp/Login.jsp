@@ -12,10 +12,8 @@
 
 		<h1>Giriş Yap</h1>
 		<form action="loginServlet" method="POST">
-			<input type="text" name="username" placeholder="Kullanıcı Adı"
-				required autofocus value="i@gmail.com"> 
-			<input type="password" value="1"
-				name="password" placeholder="Şifre" required>
+			<input type="text" name="username" placeholder="Kullanıcı Adı" required autofocus> 
+			<input type="password" name="password" placeholder="Şifre" required>
 			<button type="submit">Giriş Yap</button>
 		</form>	
 		
