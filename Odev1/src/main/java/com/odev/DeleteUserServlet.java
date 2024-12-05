@@ -2,7 +2,6 @@ package com.odev;
 
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.util.*;

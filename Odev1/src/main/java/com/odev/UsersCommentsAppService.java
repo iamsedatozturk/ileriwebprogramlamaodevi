@@ -2,14 +2,12 @@ package com.odev;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import com.odev.application.DatabaseConnection;
 import com.odev.entities.Users_Comments;
 import com.odev.entities.Users_CommentsListDto;
-import com.odev.entities.Users;
 
 public class UsersCommentsAppService {
 	public boolean insertComment(Users_Comments comment) {
