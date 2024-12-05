@@ -1,122 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ include file="./IsCheckLogin.jsp"%>
+
 <!DOCTYPE html>
-<html>
-	<head>
-	  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script> 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="https://raw.github.com/brandonaaron/jquery-mousewheel/master/jquery.mousewheel.js"></script>
-		<script type="text/javascript" src="./Script/jquery-panzoom.js"></script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Harita</title>
+<link rel="stylesheet" type="text/css" href="./Css/styles.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="./js/jquery.panzoom.js"></script>
+<script>
+	$(document).ready(function() {
+		var $section = $('#harita_content');
+		var $panzoomElement = $section.find('.panzoom');
+
+		$panzoomElement.panzoom({
+			maxScale : 4, 
+			minScale : 0.3, 
+			increment : 0.1, 
+			duration : 100, 
+			$zoomIn : $section.find(".zoom-in"),
+			$zoomOut : $section.find(".zoom-out"),
+			$zoomRange : $section.find(".zoom-range"),
+			$reset : $section.find(".reset"),
+			startTransform : "scale(0.95)",
+		});
 		
-		<link rel="stylesheet" type="text/css" media="screen" href="./Css/style.css" />
-		<script type="text/javascript">
-			$(document).ready(function () {
-		        function initPanZoom() {
-		          $('#pan img').panZoom({
-		            'zoomIn'   	: 	$('#zoomin'),
-		            'zoomOut' 	: 	$('#zoomout'),
-		            'panUp'		:	$('#panup'),
-		            'panDown'	: 	$('#pandown'),
-		            'panLeft'	:	$('#panleft'),
-		            'panRight'	:	$('#panright'),
-		            'fit'       :   $('#fit'),
-		            'destroy'   :   $('#destroy'),
-		            'out_x1'    :   $('#x1'),
-		            'out_y1'    :   $('#y1'),
-		            'out_x2'    :   $('#x2'),
-		            'out_y2'    :   $('#y2'),
-		            'directedit':   true,
-		            'debug'     :   false
-		          });
-		        };
-		
-		        initPanZoom();
-		
-				// init the image switcher
-				$('#images img').bind('click', function () {
-					$('#pan img').attr('src', $(this).attr('src'));
-				});
-		
-		        // init the init button (for testing destroy/recreate)
-		        $('#reinit').bind('click', function (event) {
-		          if ($('#pan img').data('panZoom')) {
-		            alert('Click destroy before trying to re-initialise panZoom');
-		            return;
-		          }
-		          event.preventDefault();
-		          initPanZoom();
-		        });
-			});
-		</script>
-	</head>
-	
-	<body>
-    <div class="wrapper">
-      <div id="pan">
-        <img src="./Images/turistik.jpg">
-      </div>
+	    $panzoomElement.on('wheel', function(event) {
+	        event.preventDefault();
 
-      <div id="controls">
-        <h2>Controls</h2>
-        <h3>Zoom</h3>
-        <a id="zoomin" href="#">
-          <img src="./Images/zoom_in.png"><br />
-          Zoom In
-        </a>
-        <a id="zoomout" href="#">
-          <img src="./Images/zoom_out.png"><br />
-          Zoom Out
-        </a>
+	        var delta = event.originalEvent.deltaY;
+			console.log()
 
-        <h3>Pan</h3>
-        <a id="panup" href="#">
-          <img src="./Images/arrow_up.png"><br />
-          Pan Up
-        </a>
-        <a id="pandown" href="#">
-          <img src="./Images/arrow_down.png"><br />
-          Pan Down
-        </a>
-        <a id="panleft" href="#">
-          <img src="./Images/arrow_left.png"><br />
-          Pan Left
-        </a>
-        <a id="panright" href="#">
-          <img src="./Images/arrow_right.png"><br />
-          Pan Right
-        </a>
+	        if (delta > 0) {
+	        	$section.find(".zoom-out").click();
+	        } else {
+	        	$section.find(".zoom-in").click();
+	        }
+	    });
+	});
+</script>
+</head>
+<body>
+	<jsp:include page="./Header.jsp"></jsp:include>
+	<div class="layout">
+		<section id="harita_content" class="harita_content">
+			<div class="toolbar">
+				<a href="MainPage.jsp" class="user_back-button"
+					style="margin-left: 5px"><i class="fa fa-arrow-left"></i></a>
+				<button id="zoominbtn" class="zoom-in" style="margin-left: 5px">Zoom+</button>
+				<button id="zoomoutbtn" class="zoom-out" style="margin-left: 5px">Zoom-</button>
+				<button id="restbtn" class="reset" style="margin-left: 5px">Default
+					Zoom</button>
+			</div>
 
-        <h3>Fit/Destroy</h3>
-        <a id="fit" href="#">
-          <img src="./Images/arrow_out.png"><br />
-          fit/reset
-        </a>
-        <a id="destroy" href="#">
-          <img src="./Images/cross.png"><br />
-          destroy
-        </a>
-        <a id="reinit" href="#">
-          <img src="./Images/tick.png"><br />
-          re-initialise
-        </a>
-
-        <h3>Other Controls</h3>
-        <p>You can also drag the image around or zoom with your mousewheel when hovering. Double click will zoom too.</p>
-      </div>
-     </div>
-
-     <div id="output">
-       <h2>Output</h2>
-       <p>View the current co-ordinates live. You will probably want hidden fields, but whilst they are visible, try changing the numbers.</p>
-       <table>
-         <tr>
-           <td>x1: <input type="text" name="x1" value="0" id="x1"></td><td>x2: <input type="text" name="x2" value="0" id="x2"></td>
-         </tr>
-         <tr>
-           <td>y1: <input type="text" name="y1" value="0" id="y1"></td><td>y2: <input type="text" name="y2" value="0" id="y2"></td>
-         </tr>
-       </table>
-     </div>
-	</body>
+			<div class="parent"
+				style="overflow: hidden; user-select: none; touch-action: none;">
+				<div class="panzoom">
+					<img id="harita" class="harita" src="./Images/turistik.jpg"
+						usemap="#searchplot" />
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
 </html>

@@ -377,165 +377,162 @@ button:hover {
 }
 
 .user_comments-info_yorum {
-	display: flex; 
-	flex:1;
+	display: flex;
+	flex: 1;
 	margin-bottom: 10px;
 }
 
 .user_comments-list {
-    padding: 0;
-    list-style-type: none;
+	padding: 0;
+	list-style-type: none;
 }
 
 .comment-container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
 }
 
 .comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
 .comment-user {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .comment-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 10px;
 }
 
 .comment-author {
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
+	font-weight: bold;
+	font-size: 14px;
+	color: #333;
 }
 
 .comment-date {
-    font-size: 12px;
-    color: #999;
+	font-size: 12px;
+	color: #999;
 }
 
 .comment-body {
-    font-size: 14px;
-    color: #555;
+	font-size: 14px;
+	color: #555;
 }
 
 .comment-text {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .comment-media {
-    margin-top: 10px;
-    max-width: 100%;
-    display: block;
-    overflow: hidden;
-    border-radius: 8px;
+	margin-top: 10px;
+	max-width: 100%;
+	display: block;
+	overflow: hidden;
+	border-radius: 8px;
 }
 
 .comment-image {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
+	width: 100%;
+	border-radius: 8px;
+	object-fit: cover;
 }
 
 .comment-media iframe {
-    border-radius: 8px;
+	border-radius: 8px;
 }
 
 /*Message Listesi*/
 .message-list {
-    margin-top: 20px;
-    padding: 0;
-    list-style-type: none;
-    border-radius: 10px;
+	margin-top: 20px;
+	padding: 0;
+	list-style-type: none;
+	border-radius: 10px;
 }
 
 .message-container {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 5px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
 }
 
 .message-container:hover {
-    background-color: #f4f4f4;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+	background-color: #f4f4f4;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .message-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
 .message-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 10px;
 }
 
 .message-sender {
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
+	font-weight: bold;
+	font-size: 14px;
+	color: #333;
 }
 
 .message-time {
-    margin-left: auto;
-    font-size: 12px;
-    color: #888;
+	margin-left: auto;
+	font-size: 12px;
+	color: #888;
 }
 
 .message-text {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #333;
-    word-wrap: break-word;
-    word-break: break-word;
-    margin-top: 10px;
-    width: 100%;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #333;
+	word-wrap: break-word;
+	word-break: break-word;
+	margin-top: 10px;
+	width: 100%;
 }
 
-@media (max-width: 768px) {
-    .message-container {
-        padding: 10px;
-    }
-
-    .message-sender {
-        font-size: 13px;
-    }
-
-    .message-time {
-        font-size: 11px;
-    }
-
-    .message-text {
-        font-size: 13px;
-    }
+@media ( max-width : 768px) {
+	.message-container {
+		padding: 10px;
+	}
+	.message-sender {
+		font-size: 13px;
+	}
+	.message-time {
+		font-size: 11px;
+	}
+	.message-text {
+		font-size: 13px;
+	}
 }
 
 .paging {
-   margin-top: 20px;
-   margin-bottom: 5px;
+	margin-top: 20px;
+	margin-bottom: 5px;
 }
 
 .current_page {
@@ -567,7 +564,6 @@ button:hover {
 	color: #fff;
 	background-color: #b24b4b;
 }
-
 
 .text-center {
 	text-align: center;
@@ -638,4 +634,26 @@ button:hover {
 	width: 115px;
 	height: 115px;
 	object-fit: cover;
+}
+/*HARİTA*/
+.harita_content {
+	width: 100%;
+	height: 600px;
+}
+
+.harita_content .parent {
+	width: 100%;
+	height: 600px;
+}
+
+.harita_content .parent .panzoom {
+	width: 100%;
+	height: 600px;
+	display: flex;
+	justify-content: center;
+}
+
+.harita_content .parent .panzoom .harita {
+	width: 1100px;
+	height: 600px;
 }

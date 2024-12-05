@@ -283,7 +283,7 @@
 		transition: true,
 
 		// Default cursor style for the element
-		cursor: 'move',
+		cursor: 'grab',
 
 		// There may be some use cases for zooming without panning or vice versa
 		disablePan: false,
