@@ -58,11 +58,11 @@ public class RegisterServlet extends HttpServlet {
 					fileExtension = fileName.substring(dotIndex);
 				}
 
-				String sanitizedFileName = id + fileExtension;
-				String filePath = uploadPath + File.separator + sanitizedFileName;
+				String clearFileName = id + fileExtension;
+				String filePath = uploadPath + File.separator + clearFileName;
 
 				part.write(filePath);
-				picturePath = UPLOAD_DIR + "/" + sanitizedFileName;
+				picturePath = UPLOAD_DIR + "/" + clearFileName;
 			}
 		}
 

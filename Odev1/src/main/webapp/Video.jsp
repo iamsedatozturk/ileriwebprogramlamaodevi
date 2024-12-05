@@ -83,7 +83,10 @@
 							<div class="text-center">
 								<img src="<%=comments.getCreatorPicture().length() > 0 ? comments.getCreatorPicture() : "Images/default-profile.png"%>"
 									style="width: 50px; border-radius: 50%;" />
-									
+
+								<div class="text-center">
+									<a href="User.jsp?Id=<%=comments.getCreatorId() %>"><%=comments.getCreatorName() %></a>
+								</div>								
 								<div class="text-center">
 									<%=comments.getCreateTime().toLocalDateTime().format(formatter)%>
 								</div>
@@ -119,6 +122,11 @@
 					}
 					%>
 				</tbody>
+
+				<% 
+					if(listForumCommentsAndRowCount.getRowCount() > 0) {
+				%>
+
 				<tfoot>
 					<tr>
 						<td class="pageSizeLeft" style="text-align: center"><b><%=listForumCommentsAndRowCount.getRowCount()%></b></td>
@@ -153,6 +161,11 @@
 						</td>
 					</tr>
 				</tfoot>
+				
+				<%
+					}
+				%>
+				
 			</table>
 		</main>
 	</div>

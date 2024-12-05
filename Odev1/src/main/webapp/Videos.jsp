@@ -62,11 +62,11 @@
 				</form>
 			</div>
 			
-			<form action="Forum.jsp" method="get">
+			<form action="Videos.jsp" method="get">
 				<div>
 					<input type="text" id="searchName" name="searchName" placeholder="Filtre" value="<%=searchName%>">
 
-					<button type="submit">Uygula</button>
+					<button class="filter-button" type="submit">Uygula</button>
 				</div>
 			</form>
 
@@ -79,7 +79,9 @@
 						<td width="8%" style="vertical-align: top; border-right: 1px solid #ddd">
 							<div class="text-center">
 								<img src="<%=forum.getUserPicture().length() > 0 ? forum.getUserPicture() : "Images/default-profile.png"%>" style="width: 50px; border-radius: 50%;" />
-								
+								<div class="text-center">
+									<a href="User.jsp?Id=<%=forum.getUserId() %>"><%=forum.getUserName() %></a>
+								</div>								
 								<div class="text-center">
 									<%=forum.getCreateTime().toLocalDateTime().format(formatter)%>
 								</div>
@@ -126,6 +128,11 @@
 					}
 					%>
 				</tbody>
+
+				<% 
+					if(listForumAndRowCount.getRowCount() > 0) {
+				%>
+
 				<tfoot>
 					<tr>
 						<td class="pageSizeLeft" style="text-align: center"><b><%=listForumAndRowCount.getRowCount()%></b></td>
@@ -161,6 +168,11 @@
 						</td>
 					</tr>
 				</tfoot>
+				
+				<%
+					}
+				%>
+				
 			</table>
 		</main>
 	</div>

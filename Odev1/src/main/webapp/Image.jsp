@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="com.odev.ForumAppService"%>
 <%@ page import="com.odev.entities.Forum_ListDto"%>
@@ -39,7 +38,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Forum Detayı</title>
+<title>Resim Detayı</title>
 <link rel="stylesheet" type="text/css" href="./Css/styles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,7 +46,7 @@
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="toolbar">
-		<a href="Forums.jsp" class="user_back-button"> <i
+		<a href="Images.jsp" class="user_back-button"> <i
 			class="fa fa-arrow-left"></i>
 		</a>
 	</div>
@@ -64,7 +63,7 @@
 			<form action="InsertForumsCommentsServlet" method="POST">
 				<input type="hidden" id="forumId" name="forumId" value="<%=forumId%>" />
 				<input type="hidden" id="creatorId" name="creatorId" value="<%=profile.getId()%>" />
-				<input type="hidden" id="type" name="type" value="text" />
+				<input type="hidden" id="type" name="type" value="image" />
 				
 				<textarea id="message" name="message" placeholder="Cevabınız" rows="4" cols="50" autofocus required></textarea>
 				
@@ -83,7 +82,7 @@
 							<div class="text-center">
 								<img src="<%=comments.getCreatorPicture().length() > 0 ? comments.getCreatorPicture() : "Images/default-profile.png"%>"
 									style="width: 50px; border-radius: 50%;" />
-									
+
 								<div class="text-center">
 									<a href="User.jsp?Id=<%=comments.getCreatorId() %>"><%=comments.getCreatorName() %></a>
 								</div>								
@@ -92,7 +91,7 @@
 								</div>
 							</div>
 						</td>
-						<td width="87%" style="vertical-align: top">
+						<td width="87%" style="vertical-align: top"> 
 							<div class="forum">
 								<div class="comment"><%=comments.getMessage()%></div>
 							</div>
@@ -122,7 +121,7 @@
 					}
 					%>
 				</tbody>
-
+				
 				<% 
 					if(listForumCommentsAndRowCount.getRowCount() > 0) {
 				%>
@@ -134,26 +133,25 @@
 							<div>
 								Sayfa :
 								<%
-							int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
-							String currentUrl = request.getQueryString();
-							String baseUrl = "Forum.jsp";
-
-							if (currentUrl != null && currentUrl.contains("pageNo")) {
-								currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
-							}
-							if (currentUrl != null && !currentUrl.isEmpty()) {
-								baseUrl += "?" + currentUrl;
-							}
-
-							for (int i = 1; i <= totalPages; i++) {
-								if (i == pageNo) {
-							%>
-								<span><b class="current_page"><%=i%></b></span>
+									int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
+									String currentUrl = request.getQueryString();
+									String baseUrl = "Image.jsp";
+		
+									if (currentUrl != null && currentUrl.contains("pageNo")) {
+										currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
+									}
+									if (currentUrl != null && !currentUrl.isEmpty()) {
+										baseUrl += "?" + currentUrl;
+									}
+		
+									for (int i = 1; i <= totalPages; i++) {
+										if (i == pageNo) {
+								%>
+									<span><b class="current_page"><%=i%></b></span>
 								<%
 								} else {
 								%>
-								<a class="page"
-									href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
+									<a class="page" href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
 								<%
 								}
 								}

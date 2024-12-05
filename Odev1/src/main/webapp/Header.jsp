@@ -19,7 +19,7 @@ if (sessionUser instanceof Users) {
 			<li><a href="./MainPage.jsp" class="menu-item menu-item-left">Ana Sayfa</a></li>
 			<li><a href="./Users.jsp" class="menu-item">Kişiler</a></li>
 			<li><a href="./Forums.jsp" class="menu-item">Forum</a></li>
-			<li><a href="./Photos.jsp" class="menu-item">Fotoğraflar</a></li>
+			<li><a href="./Images.jsp" class="menu-item">Fotoğraflar</a></li>
 			<li><a href="./Videos.jsp" class="menu-item">Videolar</a></li>
 			<li><a href="./Harita.jsp" class="menu-item">Harita</a></li>
 		</ul>

@@ -3,13 +3,20 @@ package com.odev;
 import com.odev.entities.Forum;
 import java.io.*;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.util.*;
 
 @SuppressWarnings("serial")
 @WebServlet("/InsertForumsServlet")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+						maxFileSize = 1024 * 1024 * 10, // 10MB
+						maxRequestSize = 1024 * 1024 * 50 // 50MB
+)
 public class InsertForumsServlet extends HttpServlet {
+	String UPLOAD_DIR = "Uploads";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	UUID id = UUID.randomUUID();
         String userId = request.getParameter("userId");
@@ -24,14 +31,46 @@ public class InsertForumsServlet extends HttpServlet {
         newForum.setComment(comment);
         newForum.setType(type);
         
-        List<String> medias = new ArrayList<>();
-        String[] selectedMedias = request.getParameterValues("video");
-        if (selectedMedias != null) {
-        	medias.addAll(Arrays.asList(selectedMedias));
-        }
-
-        newForum.setMedias(medias);
+        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdir();
+		}    
         
+    	List<String> medias = new ArrayList<>();
+    	if ("video".contains(type)) {
+            String[] selectedMedias = request.getParameterValues("video");
+            if (selectedMedias != null) {
+            	medias.addAll(Arrays.asList(selectedMedias));
+            }
+
+            newForum.setMedias(medias);	
+        }
+    	else if ("image".contains(type)) {
+    		Collection<Part> parts = request.getParts(); 
+    		
+    		for (Part part : parts) {
+    	        if (part.getName().equals("picture")) {
+    	            String fileName = part.getSubmittedFileName();
+    	            if (fileName != null && !fileName.trim().isEmpty()) {
+    	            	String fileExtension = "";
+    	                int dotIndex = fileName.lastIndexOf('.');
+    	                if (dotIndex > 0) {
+    	                    fileExtension = fileName.substring(dotIndex);
+    	                }
+
+    	                String clearFileName = id + "_" + System.currentTimeMillis() + fileExtension;
+    	                String filePath = uploadPath + File.separator + clearFileName;
+
+    	                part.write(filePath);
+
+    	                medias.add(UPLOAD_DIR + "/" + clearFileName);
+    	            }
+    	        }
+    	    }
+
+    		newForum.setMedias(medias);	
+    	}
         
         ForumAppService forumAppService = new ForumAppService();
         boolean isSave = false;

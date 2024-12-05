@@ -253,6 +253,15 @@ button {
 	cursor: pointer;
 }
 
+.filter-button {
+	padding: 6px;
+	font-size: 13px;
+	background-color: #689acf;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
 button:hover {
 	background-color: #0056b3;
 }
@@ -601,4 +610,10 @@ button:hover {
 .forum .comment {
 	margin-top: 2px;
 	font-size: 12px;
+}
+
+.forum-image {
+	width: 215px;
+	height: 215px;
+	object-fit: cover;
 }
