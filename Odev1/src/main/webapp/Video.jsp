@@ -126,26 +126,25 @@
 							<div>
 								Sayfa :
 								<%
-							int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
-							String currentUrl = request.getQueryString();
-							String baseUrl = "Video.jsp";
-
-							if (currentUrl != null && currentUrl.contains("pageNo")) {
-								currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
-							}
-							if (currentUrl != null && !currentUrl.isEmpty()) {
-								baseUrl += "?" + currentUrl;
-							}
-
-							for (int i = 1; i <= totalPages; i++) {
-								if (i == pageNo) {
-							%>
-								<span><b class="current_page"><%=i%></b></span>
+									int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
+									String currentUrl = request.getQueryString();
+									String baseUrl = "Video.jsp";
+		
+									if (currentUrl != null && currentUrl.contains("pageNo")) {
+										currentUrl = currentUrl.replaceAll("pageNo=\\d+", "");
+									}
+									if (currentUrl != null && !currentUrl.isEmpty()) {
+										baseUrl += "?" + currentUrl;
+									}
+		
+									for (int i = 1; i <= totalPages; i++) {
+										if (i == pageNo) {
+								%>
+									<span><b class="current_page"><%=i%></b></span>
 								<%
 								} else {
 								%>
-								<a class="page"
-									href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
+									<a class="page" href="<%=baseUrl + (baseUrl.contains("?") ? "&" : "?") + "pageNo=" + i%>"><%=i%></a>
 								<%
 								}
 								}
