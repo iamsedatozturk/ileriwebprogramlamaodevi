@@ -52,7 +52,7 @@ public class ForumCommentsAppService {
 		
 		String query = "SELECT * FROM public.\"Forum_Comments\" WHERE \"ForumId\" = ? ";
 
-		query += " ORDER BY \"CreateTime\" DESC LIMIT ? OFFSET ?";
+		query += " ORDER BY \"CreateTime\" ASC LIMIT ? OFFSET ?";
 		
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {

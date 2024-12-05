@@ -96,7 +96,7 @@ public class ForumAppService {
 	        query += " AND LOWER(\"Comment\") LIKE LOWER(?)";
 	    }
 		
-		query += " ORDER BY \"CreateTime\" DESC LIMIT ? OFFSET ?";
+		query += " ORDER BY \"CreateTime\" ASC LIMIT ? OFFSET ?";
 		
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
