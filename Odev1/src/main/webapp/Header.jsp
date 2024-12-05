@@ -21,7 +21,7 @@ if (sessionUser instanceof Users) {
 			<li><a href="./Forums.jsp" class="menu-item">Forum</a></li>
 			<li><a href="./Images.jsp" class="menu-item">Fotoğraflar</a></li>
 			<li><a href="./Videos.jsp" class="menu-item">Videolar</a></li>
-			<li><a href="./Harita.jsp" class="menu-item">Harita</a></li>
+			<li><a href="./Map.jsp" class="menu-item">Harita</a></li>
 		</ul>
 	</nav>
 
