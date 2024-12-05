@@ -141,14 +141,18 @@ if (profile.getName() == null) {
 					id="schoolName" name="schoolName" value="<%=profile.getSchoolName()%>" />
 
 				<label for="business">İş:</label> <input type="text" id="business"
-					name="business" value="<%=profile.getBusiness()%>" /> <label
-					for="hobies">Hobiler:</label>
+					name="business" value="<%=profile.getBusiness()%>" /> 
+					
+				<label for="hobies">Hobiler:</label>
 				<div>
 					<input type="checkbox" id="hobby1" name="hobies" value="Okuma"
 						<%=profile.getHobbies() != null && profile.getHobbies().contains("Okuma") ? "checked" : ""%> />
-					<label for="hobby1">Okuma</label> <input type="checkbox"
+					<label for="hobby1">Okuma</label> 
+					
+					<input type="checkbox"
 						id="hobby2" name="hobies" value="Seyahat"
 						<%=profile.getHobbies() != null && profile.getHobbies().contains("Seyahat") ? "checked" : ""%> />
+						
 					<label for="hobby2">Seyahat</label> <input type="checkbox"
 						id="hobby3" name="hobies" value="Yemek"
 						<%=profile.getHobbies() != null && profile.getHobbies().contains("Yemek") ? "checked" : ""%> />

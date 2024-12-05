@@ -2,6 +2,7 @@ package com.odev.entities;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 import com.odev.*;
 
@@ -11,6 +12,8 @@ public class Forum {
     private Timestamp createTime;
     private String title;
     private String comment;
+    private String type;
+    private List<String> media;
 
     private String userName;
     private String userPicture;
@@ -59,7 +62,25 @@ public class Forum {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    // type
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // media
+    public List<String> getMedias() {
+        return media;
+    }
+
+    public void setMedias(List<String> media) {
+        this.media = media;
+    }
+    
     // userName
     public String getUserName() {
         return userName;

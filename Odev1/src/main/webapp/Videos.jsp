@@ -24,14 +24,14 @@
 	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 	
 	ForumAppService forumAppService = new ForumAppService();
-	Forum_ListDto listForumAndRowCount = forumAppService.getAllForums("text", searchName, pageNo, pageSize);
+	Forum_ListDto listForumAndRowCount = forumAppService.getAllForums("video", searchName, pageNo, pageSize);
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Forum</title>
+<title>Videolar</title>
 <link rel="stylesheet" type="text/css" href="./Css/styles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -45,13 +45,15 @@
 	</div>
 	<div class="layout">
 		<main class="content">
-			<label for="title">Yeni Konu</label> 
+			<label for="title">Yeni Video</label> 
 			<div class="newforum">
 				<form action="InsertForumsServlet" method="POST">
 					<input type="hidden" id="userId" name="userId" value="<%=profile.getId()%>" />
-					<input type="hidden" id="type" name="type" value="text" />
-	
+					<input type="hidden" id="type" name="type" value="video" />
+					
 					<input type="text" id="title" name="title" autofocus required placeholder="Konu giriniz" />
+					<input type="text" id="video" name="video" placeholder="YouTube Video Linki (https://www.youtube.com/embed/{Kod})" required>
+	
 					<textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" required></textarea>
 					
 					<div class="text-right">
@@ -74,43 +76,50 @@
 					for (Forum forum : listForumAndRowCount.getForums()) {
 					%>
 					<tr>
-						<td width="8%">
+						<td width="8%" style="vertical-align: top; border-right: 1px solid #ddd">
 							<div class="text-center">
-								<img src="<%=forum.getUserPicture().length() > 0 ? forum.getUserPicture() : "Images/default-profile.png"%>"
-									style="width: 50px; border-radius: 50%;" />
-									
+								<img src="<%=forum.getUserPicture().length() > 0 ? forum.getUserPicture() : "Images/default-profile.png"%>" style="width: 50px; border-radius: 50%;" />
+								
 								<div class="text-center">
 									<%=forum.getCreateTime().toLocalDateTime().format(formatter)%>
 								</div>
 							</div>
 						</td>
-						<td width="87%" style="vertical-align: top">
+						<td width="87%">
 							<div class="forum">
-								<a href="Forum.jsp?Id=<%=forum.getId()%>">
-									<div class="title">
-										<b><%=forum.getTitle()%></b>
-									</div>
+								<a class="title" href="Video.jsp?Id=<%=forum.getId()%>">
+									<b><%=forum.getTitle()%></b>
 								</a>
 								<div class="comment"><%=forum.getComment()%></div>
+								
+								<% 
+									List<String> mediaList = forum.getMedias();
+
+									if (mediaList != null) { 
+										for (String media : mediaList) {
+										%>
+									        <iframe style="margin-top:10px" width="500" height="320" src="<%=media %>" frameborder="0" allowfullscreen></iframe>
+										<% } } %>
 							</div>
 						</td>
+						<%
+	                		if(profile.getRole().equals("Admin")) {
+	                	%>
 						<td width="5%">
         					<div style="display:flex; flex-direction: column; align-items: center">
 								<div class="text-center">
-									<%
-				                		if(profile.getRole().equals("Admin")) {
-				                	%>
-										<form action="DeleteForumServlet" method="POST">
-							                <input type="hidden" name="Id" value="<%=forum.getId()%>">
-							                
-							                <button class="delete-button" type="submit">X</button>
-							            </form>		
-						            <%
-						            	}
-						            %>		
+									<form action="DeleteForumServlet" method="POST">
+						                <input type="hidden" name="Id" value="<%=forum.getId()%>">
+						                
+						                <button class="delete-button" type="submit">X</button>
+						            </form>		
 								</div>
 							</div>
 						</td>
+						            
+			            <%
+			            	}
+			            %>		
 					</tr>
 					<%
 					}

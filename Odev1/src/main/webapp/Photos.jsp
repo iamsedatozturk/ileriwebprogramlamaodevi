@@ -5,9 +5,6 @@
 <%@ page import="com.odev.entities.Forum_ListDto"%>
 <%@ page import="java.util.*,java.sql.*"%>
 <%@ page import="com.odev.entities.Forum"%>
-<%@ page import="com.odev.entities.Forum_Comments"%>
-<%@ page import="com.odev.entities.Forum_CommentsListDto"%>
-<%@ page import="com.odev.ForumCommentsAppService"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
 <%@ page import="java.util.Locale"%>
 
@@ -15,7 +12,7 @@
 
 <%
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("tr"));
-	String forumId = request.getParameter("Id") != "" ? request.getParameter("Id") : "";
+	String searchName = request.getParameter("searchName") != null ? request.getParameter("searchName") : "";
 	
 	Users profile = new Users();
 	Object sessionProfile = mySession.getAttribute("user");
@@ -26,20 +23,15 @@
 	int pageSize = 5;
 	int pageNo = request.getParameter("pageNo") != null ? Integer.parseInt(request.getParameter("pageNo")) : 1;
 	
-	//Forum Bilgilerine ulaştık
 	ForumAppService forumAppService = new ForumAppService();
-	Forum forum = forumAppService.getForum(UUID.fromString(forumId));
-	
-	//Form Comments ulaştık.
-	ForumCommentsAppService forumCommentsAppService = new ForumCommentsAppService();
-	Forum_CommentsListDto listForumCommentsAndRowCount = forumCommentsAppService.getAllComments(UUID.fromString(forumId), pageNo, pageSize);
+	Forum_ListDto listForumAndRowCount = forumAppService.getAllForums("image", searchName, pageNo, pageSize);
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Forum Detayı</title>
+<title>Resimler</title>
 <link rel="stylesheet" type="text/css" href="./Css/styles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,69 +39,78 @@
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="toolbar">
-		<a href="Forums.jsp" class="user_back-button"> <i
+		<a href="MainPage.jsp" class="user_back-button"> <i
 			class="fa fa-arrow-left"></i>
 		</a>
 	</div>
 	<div class="layout">
 		<main class="content">
-			<div class="forumdetay">
-				<div class="title">
-					<b><%=forum.getTitle()%></b>
-				</div>
-				<div class="comment"><%=forum.getComment()%></div>
+			<label for="title">Yeni Resim</label> 
+			<div class="newforum">
+				<form action="InsertForumsServlet" method="POST">
+					<input type="hidden" id="userId" name="userId" value="<%=profile.getId()%>" />
+					<input type="hidden" id="type" name="type" value="image" />
+	
+					<input type="text" id="title" name="title" autofocus required placeholder="Konu giriniz" />
+	
+					<textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:99%" required></textarea>
+					
+					<div class="text-right">
+						<button style="width: 120px" type="submit">Gönder</button>
+					</div>
+				</form>
 			</div>
 			
-			<label for="title">Yeni Cevap</label> 
-			<form action="InsertForumsCommentsServlet" method="POST">
-				<input type="hidden" id="forumId" name="forumId" value="<%=forumId%>" />
-				<input type="hidden" id="creatorId" name="creatorId" value="<%=profile.getId()%>" />
-				
-				<textarea id="message" name="message" placeholder="Cevabınız" rows="4" cols="50" autofocus required></textarea>
-				
-				<div class="text-right">
-					<button style="width: 120px" type="submit">Gönder</button>
+			<form action="Forum.jsp" method="get">
+				<div>
+					<input type="text" id="searchName" name="searchName" placeholder="Filtre" value="<%=searchName%>">
+
+					<button type="submit">Uygula</button>
 				</div>
 			</form>
-			
+
 			<table border="1">
 				<tbody>
 					<%
-					for (Forum_Comments comments : listForumCommentsAndRowCount.getForum_Comments()) {
+					for (Forum forum : listForumAndRowCount.getForums()) {
 					%>
 					<tr>
 						<td width="8%">
 							<div class="text-center">
-								<img src="<%=comments.getCreatorPicture().length() > 0 ? comments.getCreatorPicture() : "Images/default-profile.png"%>"
+								<img
+									src="<%=forum.getUserPicture().length() > 0 ? forum.getUserPicture() : "Images/default-profile.png"%>"
 									style="width: 50px; border-radius: 50%;" />
-								<div class="text-center">
-									<%=comments.getCreateTime().toLocalDateTime().format(formatter)%>
-								</div>
 							</div>
 						</td>
-						<td width="87%" style="vertical-align: top">
+						<td width="82%">
 							<div class="forum">
-								<div class="comment"><%=comments.getMessage()%></div>
+								<a href="Forum.jsp?Id=<%=forum.getId()%>">
+									<div class="title">
+										<b><%=forum.getTitle()%></b>
+									</div>
+								</a>
+								<div class="comment"><%=forum.getComment()%></div>
 							</div>
 						</td>
-						<td width="5%" class="text-center">
+						<td width="10%">
         					<div style="display:flex; flex-direction: column; align-items: center">
 								<div class="text-center">
 									<%
-			                			if(profile.getRole().equals("Admin")) {
+				                		if(profile.getRole().equals("Admin")) {
 				                	%>
-										<form action="DeleteForumCommentsServlet" method="POST">
-							                <input type="hidden" name="Id" value="<%=comments.getId()%>">
-							                <input type="hidden" name="forumId" value="<%=forumId%>">
+										<form action="DeleteForumServlet" method="POST">
+							                <input type="hidden" name="Id" value="<%=forum.getId()%>">
 							                
 							                <button class="delete-button" type="submit">X</button>
 							            </form>		
 						            <%
 						            	}
-						            %>
-								</div>    
-				            </div>		
-						
+						            %>		
+								</div>
+								<div class="text-center">
+									<%=forum.getCreateTime().toLocalDateTime().format(formatter)%>
+								</div>
+							</div>
 						</td>
 					</tr>
 					<%
@@ -118,12 +119,12 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="pageSizeLeft" style="text-align: center"><b><%=listForumCommentsAndRowCount.getRowCount()%></b></td>
+						<td class="pageSizeLeft" style="text-align: center"><b><%=listForumAndRowCount.getRowCount()%></b></td>
 						<td colspan="2" class="pageSizeRight">
 							<div>
 								Sayfa :
 								<%
-							int totalPages = (int) Math.ceil((double) listForumCommentsAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
+							int totalPages = (int) Math.ceil((double) listForumAndRowCount.getRowCount() / pageSize); // Toplam sayfa sayısı
 							String currentUrl = request.getQueryString();
 							String baseUrl = "Forums.jsp";
 

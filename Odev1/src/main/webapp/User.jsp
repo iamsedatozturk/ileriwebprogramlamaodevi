@@ -174,8 +174,7 @@
 				        </div>
 				
 				        <div id="videoComment" style="display:none;">
-							<input type="text" id="video" name="video"
-								placeholder="YouTube Video Linki (https://www.youtube.com/embed/{Kod})" style="width: 98%">
+							<input type="text" id="video" name="video" placeholder="YouTube Video Linki (https://www.youtube.com/embed/{Kod})" style="width: 98%">
 						</div>
 				
 			            <textarea id="comment" name="comment" placeholder="Yorumunuz" rows="4" cols="50" style="width:98%" required></textarea>

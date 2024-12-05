@@ -39,7 +39,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Forum Detayı</title>
+<title>Video Detayı</title>
 <link rel="stylesheet" type="text/css" href="./Css/styles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,7 +47,7 @@
 <body>
 	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="toolbar">
-		<a href="Forums.jsp" class="user_back-button"> <i
+		<a href="Videos.jsp" class="user_back-button"> <i
 			class="fa fa-arrow-left"></i>
 		</a>
 	</div>
@@ -82,12 +82,13 @@
 							<div class="text-center">
 								<img src="<%=comments.getCreatorPicture().length() > 0 ? comments.getCreatorPicture() : "Images/default-profile.png"%>"
 									style="width: 50px; border-radius: 50%;" />
+									
 								<div class="text-center">
 									<%=comments.getCreateTime().toLocalDateTime().format(formatter)%>
 								</div>
 							</div>
 						</td>
-						<td width="87%" style="vertical-align: top">
+						<td width="87%" style="vertical-align: top"> 
 							<div class="forum">
 								<div class="comment"><%=comments.getMessage()%></div>
 							</div>

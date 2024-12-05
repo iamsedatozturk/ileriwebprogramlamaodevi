@@ -2,6 +2,7 @@ package com.odev;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,8 +12,8 @@ import com.odev.entities.Forum_ListDto;
 
 public class ForumAppService {
 	public boolean insertForum(Forum forum) {
-        String query = "INSERT INTO public.\"Forum\" (\"Id\", \"UserId\", \"Title\", \"Comment\") " +
-    					"VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO public.\"Forum\" (\"Id\", \"UserId\", \"Title\", \"Comment\", \"Type\", \"Media\") " +
+    					"VALUES (?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = DatabaseConnection.connect();
 				PreparedStatement statement = connection.prepareStatement(query)) {
@@ -21,7 +22,14 @@ public class ForumAppService {
 			statement.setObject(2, forum.getUserId());
 			statement.setString(3, forum.getTitle());
 			statement.setObject(4, forum.getComment());
-
+			statement.setString(5, forum.getType());
+			
+			if (forum.getMedias() != null) {
+            	statement.setArray(6, connection.createArrayOf("text", forum.getMedias().toArray(new String[0])));
+			} else {
+				statement.setNull(6, java.sql.Types.ARRAY);
+			}
+			
 			int rowsAffected = statement.executeUpdate();
 			return rowsAffected > 0;
 		} catch (Exception e) {
@@ -60,11 +68,15 @@ public class ForumAppService {
 				if (resultSet.next()) {
 					forum = new Forum();
 					
+					Array mediasArray = resultSet.getArray("Media");
+					
 					forum.setId(resultSet.getString("Id") == null ? null : UUID.fromString(resultSet.getString("Id")));
 					forum.setUserId(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 					forum.setCreateTime(resultSet.getTimestamp("CreateTime") == null ? null : resultSet.getTimestamp("CreateTime"));
 					forum.setTitle(resultSet.getString("Title") == null ? "" : resultSet.getString("Title"));
 					forum.setComment(resultSet.getString("Comment") == null ? "" : resultSet.getString("Comment"));
+					forum.setType(resultSet.getString("Type") == null ? "" : resultSet.getString("Type"));
+					forum.setMedias(resultSet.getArray("Media") == null ? null : Arrays.asList((String[]) mediasArray.getArray()));
 					forum.setUserName(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 					forum.setUserPicture(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 				}
@@ -105,11 +117,15 @@ public class ForumAppService {
 				while (resultSet.next()) {
 					Forum forum = new Forum();
 	
+					Array mediasArray = resultSet.getArray("Media");
+					
 					forum.setId(resultSet.getString("Id") == null ? null : UUID.fromString(resultSet.getString("Id")));
 					forum.setUserId(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 					forum.setCreateTime(resultSet.getTimestamp("CreateTime") == null ? null : resultSet.getTimestamp("CreateTime"));
 					forum.setTitle(resultSet.getString("Title") == null ? "" : resultSet.getString("Title"));
 					forum.setComment(resultSet.getString("Comment") == null ? "" : resultSet.getString("Comment"));
+					forum.setType(resultSet.getString("Type") == null ? "" : resultSet.getString("Type"));
+					forum.setMedias(resultSet.getArray("Media") == null ? null : Arrays.asList((String[]) mediasArray.getArray()));
 					forum.setUserName(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 					forum.setUserPicture(resultSet.getString("UserId") == null ? null : UUID.fromString(resultSet.getString("UserId")));
 					
@@ -118,13 +134,13 @@ public class ForumAppService {
 			}
 		}
 
-		int totalCount = getTotalForums(searchName);
+		int totalCount = getTotalForums(type, searchName);
 		
 		return new Forum_ListDto(forums, totalCount);
 	}
 	
-	public int getTotalForums(String searchName) throws SQLException, ClassNotFoundException{
-		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Forum\" WHERE 1=1";
+	public int getTotalForums(String type, String searchName) throws SQLException, ClassNotFoundException{
+		String query = "SELECT COUNT(\"Id\") AS total FROM public.\"Forum\" WHERE \"Type\" = ?";
 
 		if (searchName != null && !searchName.isEmpty()) {
 	        query += " AND LOWER(\"Comment\") LIKE LOWER(?)";
@@ -133,8 +149,10 @@ public class ForumAppService {
 	    try (Connection connection = DatabaseConnection.connect();
     		PreparedStatement statement = connection.prepareStatement(query)) {
 
+	    	statement.setString(1, type);
+	    	
 	    	if (searchName != null && !searchName.isEmpty()) {
-				statement.setString(1, "%" + searchName + "%");
+				statement.setString(2, "%" + searchName + "%");
 	        }
 	    	
         	ResultSet rs = statement.executeQuery();
