@@ -18,7 +18,7 @@
 	</session-config>
 	<context-param>
 		<param-name>dbUrl</param-name>
-		<param-value>jdbc:postgresql://dpg-ct4cdttds78s73bhu7s0-a.frankfurt-postgres.render.com:5432/odev1</param-value>
+		<param-value>jdbc:postgresql://dpg-ctiska8gph6c738cdhcg-a.frankfurt-postgres.render.com:5432/odev1_17de</param-value>
 	</context-param>
 	<context-param>
 		<param-name>dbUser</param-name>
@@ -26,7 +26,7 @@
 	</context-param>
 	<context-param>
 		<param-name>dbPassword</param-name>
-		<param-value>qNgqTkPT8lnyPhO92vofBAiaQcHZpAsk</param-value>
+		<param-value>bwcpuqBNFdaAwQWXvSsklgz8SPlRCZ6I</param-value>
 	</context-param>
 	<error-page>
 		<error-code>404</error-code>
